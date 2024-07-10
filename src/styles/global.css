@@ -44,6 +44,35 @@
   --box-shadow-normal: 1rem 1rem 4rem var(--color-grey-shadow);
 }
 
+/* Animations */
+
+@view-transition {
+  navigation: auto;
+}
+
+/**
+  * Required class: `lsa` (initializes animations and defaults to fade-in)
+  * Note: Add `no-repeat` class to prevent animations from repeating on scroll
+  */
+
+/* Accessibility: disable animations for users that prefer reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  /* Initialize & fade in element on scroll */
+  .lsa {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-long), visibility var(--transition-long),
+      transform var(--transition-long);
+  }
+
+  /* Handle active state */
+  .lsa.active {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+}
+
 html,
 body {
   padding: 0;
@@ -159,7 +188,7 @@ svg {
 }
 
 .site-cta:hover {
-  transform: scale(1.01);
+  transform: scale(1.01) !important;
   box-shadow: var(--box-shadow-normal);
 }
 

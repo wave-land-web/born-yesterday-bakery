@@ -11,14 +11,14 @@ import sydTwo from '../../../assets/syd-two.jpg'
 
 <section id="about" class="about">
   <SectionHeader title="About Us" />
-  <p>
+  <p class="lsa no-repeat">
     Born Yesterday is a small bakery in Western Maine making sourdough baked goods, with a focus on
     organic, local and whole grains. We see bread as a handmade product that is wildly crafted,
     using our hands, bodies and minds. A lot of cool 😎 fermentation goes on here and half of it is
     controlled by those hands and minds, but the other half is just food doing its thing. Hope you
     like us doing our thing and find something tasty here.
   </p>
-  <div class="about-images">
+  <div class="about-images lsa no-repeat">
     <div class="image-container">
       <Picture
         class="image-one"
@@ -74,8 +74,8 @@ import sydTwo from '../../../assets/syd-two.jpg'
       />
     </div>
   </div>
-  <a class="site-cta" href="/menu">See Our Menu</a>
-  <div class="about-hours">
+  <a class="site-cta lsa no-repeat" href="/menu">See Our Menu</a>
+  <div class="about-hours lsa no-repeat">
     <h3>Hours</h3>
     <ul>
       <li>Monday <span>10 am - 2 pm</span></li>
@@ -181,43 +181,41 @@ import sydTwo from '../../../assets/syd-two.jpg'
 </style>
 
 <script>
-  document.addEventListener('astro:page-load', () => {
-    const images = document.querySelectorAll('.image-container')
+  const images = document.querySelectorAll('.image-container')
 
-    function handleActiveImagesOnScroll() {
-      if (!window.IntersectionObserver) {
-        return console.log('IntersectionObserver not supported')
-      }
-
-      const options = {
-        root: null,
-        rootMargin: '-25%',
-        threshold: 0.1,
-      }
-
-      const observer = new IntersectionObserver((entries) => {
-        if (window.innerWidth < 768) {
-          entries.forEach((entry) => {
-            const image = entry.target
-
-            if (entry.isIntersecting) {
-              image.classList.add('active')
-            } else {
-              image.classList.remove('active')
-            }
-          })
-        }
-      }, options)
-
-      images.forEach((section) => observer.observe(section))
+  function handleActiveImagesOnScroll() {
+    if (!window.IntersectionObserver) {
+      return console.log('IntersectionObserver not supported')
     }
 
-    // Reset active sections on resize
-    window.addEventListener('resize', () => {
-      images.forEach((image) => image.classList.remove('active'))
-    })
+    const options = {
+      root: null,
+      rootMargin: '-25%',
+      threshold: 0.1,
+    }
 
-    // Set active sections on scroll
-    document.addEventListener('scroll', handleActiveImagesOnScroll)
+    const observer = new IntersectionObserver((entries) => {
+      if (window.innerWidth < 768) {
+        entries.forEach((entry) => {
+          const image = entry.target
+
+          if (entry.isIntersecting) {
+            image.classList.add('active')
+          } else {
+            image.classList.remove('active')
+          }
+        })
+      }
+    }, options)
+
+    images.forEach((section) => observer.observe(section))
+  }
+
+  // Reset active sections on resize
+  window.addEventListener('resize', () => {
+    images.forEach((image) => image.classList.remove('active'))
   })
+
+  // Set active sections on scroll
+  document.addEventListener('scroll', handleActiveImagesOnScroll)
 </script>

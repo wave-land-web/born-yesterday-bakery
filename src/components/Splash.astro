@@ -140,32 +140,38 @@ const { src: sproutedRyeImageWebp } = await getImage({
 </style>
 
 <script>
+  /**
+   * Handle show/hide of the splash screen
+   */
   function handleSplashDisplay() {
     const body = document.querySelector('body')
     const splash = document.querySelector('.splash')
     const buttons = document.querySelectorAll('.splash .site-cta')
     const userClosedSplash = sessionStorage.getItem('user-closed-splash') === 'true'
 
+    // Close
     const closeSplash = () => {
       splash?.classList.remove('active')
       body!.dataset.overlayDisplayed = 'false'
       sessionStorage.setItem('user-closed-splash', 'true')
     }
 
+    // Show
     const showSplash = () => {
       splash?.classList.add('active')
       body!.dataset.overlayDisplayed = 'true'
       sessionStorage.setItem('user-closed-splash', 'false')
     }
 
-    // If user has not closed the splash, show it
+    // Show splash if the user hasn't closed it during this session
     if (!userClosedSplash) {
       showSplash()
     }
 
+    // (On Click) - Close the splash screen
     buttons.forEach((button) => button.addEventListener('click', closeSplash))
   }
 
-  // Load immediately if the DOM is ready
-  document.addEventListener('astro:page-load', handleSplashDisplay)
+  // (On Load) - Show the splash screen
+  document.addEventListener('DOMContentLoaded', handleSplashDisplay)
 </script>

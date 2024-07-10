@@ -1,9 +1,9 @@
 ---
 import { Icon } from 'astro-icon/components'
-import Layout from '../layouts/Layout.astro'
+import kouignAmannImage from '../assets/kouign-amann.jpeg'
 import HeroBanner from '../components/layout/HeroBanner.astro'
 import SectionHeader from '../components/text/SectionHeader.astro'
-import kouignAmannImage from '../assets/kouign-amann.jpeg'
+import Layout from '../layouts/Layout.astro'
 ---
 
 <Layout
@@ -12,7 +12,7 @@ import kouignAmannImage from '../assets/kouign-amann.jpeg'
 >
   <HeroBanner title="Contact Us" image={kouignAmannImage} />
   <main>
-    <section id="contact" class="contact">
+    <section id="contact" class="contact lsa no-repeat">
       <form method="POST" class="form" name="contactForm" action="/success" data-netlify="true">
         <SectionHeader title="Let's Chat" class="section-header" />
         <div class="form-field">
