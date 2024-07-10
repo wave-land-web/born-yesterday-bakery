@@ -8,6 +8,9 @@ export default defineConfig({
   prefetch: {
     prefetchAll: true,
   },
+  build: {
+    inlineStylesheets: 'always',
+  },
   integrations: [
     sitemap({
       filter: (page) => page !== 'https://bornyesterdaybakery.com/success/',
