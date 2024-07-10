@@ -1,0 +1,23 @@
+---
+import anadamaImage from '../assets/focaccia.jpg'
+import HeroBanner from '../components/layout/HeroBanner.astro'
+import SectionHeader from '../components/text/SectionHeader.astro'
+import Layout from '../layouts/Layout.astro'
+---
+
+<Layout
+  title="Born Yesterday Bakery | Sourcing"
+  description="Our commitment to organic, local, and sustainable sourcing."
+>
+  <HeroBanner
+    title="Sourcing"
+    image={anadamaImage}
+    description="Our Commitment to Organic and Local Sourcing"
+  />
+  <main>
+    <SectionHeader
+      title="Why We Prioritize Organic and Local Ingredients"
+      description="We believe that by investing in our community and supporting sustainable practices, we can create the best bread while contributing to a healthier environment and economy."
+    />
+  </main>
+</Layout>

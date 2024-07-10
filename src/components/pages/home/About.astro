@@ -10,14 +10,10 @@ import sydTwo from '../../../assets/syd-two.jpg'
 ---
 
 <section id="about" class="about">
-  <SectionHeader title="About Us" />
-  <p class="lsa no-repeat">
-    Born Yesterday is a small bakery in Western Maine making sourdough baked goods, with a focus on
-    organic, local and whole grains. We see bread as a handmade product that is wildly crafted,
-    using our hands, bodies and minds. A lot of cool 😎 fermentation goes on here and half of it is
-    controlled by those hands and minds, but the other half is just food doing its thing. Hope you
-    like us doing our thing and find something tasty here.
-  </p>
+  <SectionHeader
+    title="About Us"
+    description="Born Yesterday is a small bakery in Western Maine making sourdough baked goods, with a focus on organic, local and whole grains. We see bread as a handmade product that is wildly crafted, using our hands, bodies and minds. A lot of cool 😎 fermentation goes on here and half of it is controlled by those hands and minds, but the other half is just food doing its thing. Hope you like us doing our thing and find something tasty here."
+  />
   <div class="about-images lsa no-repeat">
     <div class="image-container">
       <Picture
@@ -74,7 +70,7 @@ import sydTwo from '../../../assets/syd-two.jpg'
       />
     </div>
   </div>
-  <a class="site-cta lsa no-repeat" href="/menu">See Our Menu</a>
+  <a class="site-cta lsa no-repeat" href="/sourcing">Our Sourcing Story</a>
   <div class="about-hours lsa no-repeat">
     <h3>Hours</h3>
     <ul>
@@ -92,11 +88,6 @@ import sydTwo from '../../../assets/syd-two.jpg'
 <style>
   .about {
     border-bottom: 1px solid var(--color-grey);
-  }
-
-  .about p {
-    margin: 0 auto 2rem;
-    max-width: 750px;
   }
 
   .about-images {

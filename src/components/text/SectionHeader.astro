@@ -1,18 +1,30 @@
 ---
 export interface Props {
   title: string
+  description?: string
   class?: string
 }
 
-const { title, class: className } = Astro.props
+const { title, description, class: className } = Astro.props
 ---
 
-<h2 class={`${className} lsa no-repeat`}>{title}</h2>
+<div class={`${className} header lsa no-repeat`}>
+  <h2>{title}</h2>
+  {description && <p>{description}</p>}
+</div>
 
 <style>
-  h2 {
-    margin: 0 0 2rem;
-    font-size: clamp(var(--size-lg), 7vw, var(--size-xl));
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    max-width: 750px;
+    margin: 0 auto 2rem;
     text-align: center;
+  }
+
+  h2 {
+    font-size: clamp(var(--size-lg), 7vw, var(--size-xl));
   }
 </style>

@@ -14,7 +14,7 @@ import Layout from '../layouts/Layout.astro'
   <main>
     <section id="contact" class="contact lsa no-repeat">
       <form method="POST" class="form" name="contactForm" action="/success" data-netlify="true">
-        <SectionHeader title="Let's Chat" class="section-header" />
+        <SectionHeader title="Let's Chat" />
         <div class="form-field">
           <input id="name" type="text" name="name" placeholder=" " required />
           <label for="name">Name: <span>*</span></label>
@@ -71,16 +71,6 @@ import Layout from '../layouts/Layout.astro'
       display: grid;
       grid-template-columns: 1fr 350px;
       grid-gap: 6vw;
-    }
-  }
-
-  .section-header {
-    margin-bottom: 4rem;
-  }
-
-  @media (min-width: 768px) {
-    .section-header {
-      text-align: left;
     }
   }
 

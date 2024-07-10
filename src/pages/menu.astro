@@ -1,6 +1,7 @@
 ---
 import seasonalGalettesImage from '../assets/seasonal-galettes.jpeg'
 import HeroBanner from '../components/layout/HeroBanner.astro'
+import SectionHeader from '../components/text/SectionHeader.astro'
 import Layout from '../layouts/Layout.astro'
 
 // Can these be imported from Square?
@@ -116,7 +117,7 @@ const menuItems = {
   <main>
     <section id="menu" class="menu">
       <div class="menu-category lsa no-repeat">
-        <h2>Bread</h2>
+        <SectionHeader title="Bread" class="section-header" />
         <ul>
           {
             menuItems.bread.map((item) => (
@@ -129,7 +130,7 @@ const menuItems = {
         </ul>
       </div>
       <div class="menu-category lsa no-repeat">
-        <h2>Pastries</h2>
+        <SectionHeader title="Pastries" class="section-header" />
         <ul>
           {
             menuItems.pastries.map((item) => (
@@ -142,7 +143,7 @@ const menuItems = {
         </ul>
       </div>
       <div class="menu-category lsa no-repeat">
-        <h2>CSA (Morning Glory Farm + New Spoke Farm)</h2>
+        <SectionHeader title="CSA (Morning Glory Farm + New Spoke Farm)" class="section-header" />
         <ul>
           {
             menuItems.csa.map((item) => (
@@ -155,7 +156,7 @@ const menuItems = {
         </ul>
       </div>
       <div class="menu-category lsa no-repeat">
-        <h2>Weekly Subscription</h2>
+        <SectionHeader title="Weekly Subscription" class="section-header" />
         <ul>
           {
             menuItems.subscription.map((item) => (
@@ -195,16 +196,13 @@ const menuItems = {
     max-width: 600px;
   }
 
-  .menu-category h2 {
+  .menu-category .section-header {
     margin-bottom: 2.5rem;
-    font-size: var(--size-lg);
   }
 
   @media (min-width: 768px) {
-    .menu-category h2 {
+    .menu-category .section-header {
       margin-bottom: 3.25rem;
-      font-size: var(--size-xl);
-      text-align: center;
     }
   }
 
