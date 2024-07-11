@@ -1,0 +1,77 @@
+---
+import { Picture } from 'astro:assets'
+import fareShareFood from '../../assets/fare-share-food.webp'
+import goodFoodBethel from '../../assets/good-food-bethel.png'
+import morningGloryFarm from '../../assets/morning-glory-farm.png'
+import mountainSocial from '../../assets/mountain-social.webp'
+import tableBar from '../../assets/table-bar.jpg'
+
+const companyData = [
+  {
+    name: 'Good Food Store',
+    url: 'https://www.goodfoodbethel.com/',
+    logo: goodFoodBethel,
+  },
+  {
+    name: 'Fare Share Food Co-op',
+    url: 'https://www.faresharecoop.org/',
+    logo: fareShareFood,
+  },
+  {
+    name: 'Mountain Social Kitchen & Bar',
+    url: 'https://www.socialbarharbor.com/mountain-social-bethel',
+    logo: mountainSocial,
+  },
+  {
+    name: 'Morning Glory Farm',
+    url: 'https://www.morninggloryfarmmaine.com/',
+    logo: morningGloryFarm,
+  },
+  {
+    name: 'Table Bar',
+    url: 'https://www.tablebar207.com/',
+    logo: tableBar,
+  },
+]
+---
+
+<div class="company-logos">
+  {
+    companyData.map((company) => {
+      return (
+        <div class="logo">
+          <a href={company.url} target="_blank" rel="noopener noreferrer" aria-label={company.name}>
+            <Picture src={company.logo} formats={['avif', 'webp']} alt={company.name} />
+          </a>
+        </div>
+      )
+    })
+  }
+</div>
+
+<style>
+  .company-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 3rem;
+    margin-bottom: 6rem;
+    padding: 1rem 0;
+  }
+
+  .logo {
+    width: 9rem;
+    height: 9rem;
+  }
+
+  .logo:nth-of-type(2) {
+    background-color: var(--color-black);
+    border-radius: 50%;
+  }
+
+  .logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+</style>

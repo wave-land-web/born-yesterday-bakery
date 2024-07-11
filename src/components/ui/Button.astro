@@ -1,0 +1,29 @@
+---
+export interface Props {
+  text: string
+  class?: string
+  isLink: boolean
+  href?: string
+  newWindow?: boolean
+  type?: HTMLButtonElement['type']
+}
+
+const { text, class: className, isLink, href, newWindow, type } = Astro.props
+---
+
+{
+  isLink ? (
+    <a
+      class={`${className} site-cta lsa no-repeat`}
+      href={href}
+      target={newWindow ? '_blank' : '_self'}
+      rel={newWindow ? 'noopener noreferrer' : ''}
+    >
+      {text}
+    </a>
+  ) : (
+    <button class={`${className} site-cta lsa no-repeat`} {type}>
+      {text}
+    </button>
+  )
+}

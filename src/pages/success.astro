@@ -2,6 +2,7 @@
 import breadSunflowerImage from '../assets/bread-sunflower.jpeg'
 import HeroBanner from '../components/layout/HeroBanner.astro'
 import SectionHeader from '../components/text/SectionHeader.astro'
+import Button from '../components/ui/Button.astro'
 import Layout from '../layouts/Layout.astro'
 ---
 
@@ -16,7 +17,7 @@ import Layout from '../layouts/Layout.astro'
         title="Thank you for your message"
         description="We will get back to you as soon as we can!"
       />
-      <a class="site-cta" href="/">Back to home</a>
+      <Button text="Back to home" isLink={true} href="/" class="button-custom" />
     </section>
   </main>
 </Layout>
@@ -26,7 +27,7 @@ import Layout from '../layouts/Layout.astro'
     margin-bottom: 2rem;
   }
 
-  .success .site-cta {
+  .success .button-custom {
     display: block;
     max-width: fit-content;
     margin: 0 auto;

@@ -3,6 +3,7 @@ import { Icon } from 'astro-icon/components'
 import kouignAmannImage from '../assets/kouign-amann.jpeg'
 import HeroBanner from '../components/layout/HeroBanner.astro'
 import SectionHeader from '../components/text/SectionHeader.astro'
+import Button from '../components/ui/Button.astro'
 import Layout from '../layouts/Layout.astro'
 ---
 
@@ -28,7 +29,7 @@ import Layout from '../layouts/Layout.astro'
           ></textarea>
           <label for="message">Message: <span>*</span></label>
         </div>
-        <button class="site-cta" type="submit">Send Message</button>
+        <Button text="Send Message" isLink={false} type="submit" class="button-custom" />
       </form>
 
       <aside class="contact-info">
@@ -169,15 +170,8 @@ import Layout from '../layouts/Layout.astro'
     color: var(--color-primary);
   }
 
-  .form button {
+  .form .button-custom {
     margin: 0 auto;
-    font-size: var(--size-sm);
-  }
-
-  @media (min-width: 768px) {
-    .form button {
-      font-size: var(--size-base);
-    }
   }
 
   .contact-info {
