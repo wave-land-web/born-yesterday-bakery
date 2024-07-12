@@ -15,7 +15,7 @@ import Layout from '../layouts/Layout.astro'
   <main>
     <section id="contact" class="contact lsa no-repeat">
       <form method="POST" class="form" name="contactForm" action="/success" data-netlify="true">
-        <SectionHeader title="Let's Chat" />
+        <SectionHeader title="Let's Chat" class="section-header-custom" />
         <div class="form-field">
           <input id="name" type="text" name="name" placeholder=" " required />
           <label for="name">Name: <span>*</span></label>
@@ -79,6 +79,10 @@ import Layout from '../layouts/Layout.astro'
     display: flex;
     flex-direction: column;
     margin-bottom: 4rem;
+  }
+
+  .section-header-custom {
+    margin: 0 auto 2rem;
   }
 
   .form-field {

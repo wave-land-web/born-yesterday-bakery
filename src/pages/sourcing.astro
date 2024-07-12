@@ -1,5 +1,7 @@
 ---
+import { Picture } from 'astro:assets'
 import anadamaImage from '../assets/focaccia.jpg'
+import sourcingAnadama from '../assets/sourcing-anadama.jpg'
 import HeroBanner from '../components/layout/HeroBanner.astro'
 import SectionHeader from '../components/text/SectionHeader.astro'
 import Layout from '../layouts/Layout.astro'
@@ -15,9 +17,48 @@ import Layout from '../layouts/Layout.astro'
     description="Our Commitment to Organic and Local Sourcing"
   />
   <main>
-    <SectionHeader
-      title="Why We Prioritize Organic and Local Ingredients"
-      description="We believe that by investing in our community and supporting sustainable practices, we can create the best bread while contributing to a healthier environment and economy."
-    />
+    <section id="introduction">
+      <div class="column">
+        <SectionHeader
+          title="Why We Prioritize Organic and Local Ingredients"
+          description="We believe that by investing in our community and supporting sustainable practices, we can create the best bread while contributing to a healthier environment and economy."
+          class="section-header-custom"
+        />
+        <div class="image-container">
+          <Picture src={sourcingAnadama} alt="Anadama bread" class="image" />
+        </div>
+      </div>
+    </section>
   </main>
 </Layout>
+
+<style>
+  .section-header-custom {
+    text-align: left;
+  }
+
+  .column {
+    display: grid;
+    gap: 4rem;
+  }
+
+  @media (min-width: 768px) {
+    .column {
+      grid-template-columns: repeat(2, 1fr);
+      justify-content: space-between;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .image-container {
+      position: relative;
+    }
+
+    .image {
+      height: 100%;
+      position: absolute;
+      object-fit: cover;
+      box-shadow: var(--box-shadow-normal);
+    }
+  }
+</style>

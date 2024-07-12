@@ -38,6 +38,8 @@
   --size-xl: 3.052rem;
   --size-xxl: 3.815rem;
 
+  --border-radius-image: 0.25rem;
+
   --transition-normal: 0.2s ease-in-out;
   --transition-long: 0.5s ease-in-out;
 
@@ -110,10 +112,6 @@ main {
   }
 }
 
-main p {
-  text-align: center;
-}
-
 h1 {
   font-family: var(--font-bobby-soft);
 }
@@ -166,6 +164,13 @@ button {
 
 section:not(:last-child) {
   margin-bottom: 6rem;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--border-radius-image);
 }
 
 svg {

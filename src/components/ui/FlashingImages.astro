@@ -75,7 +75,7 @@ import sydTwo from '../../assets/syd-two.jpg'
     padding: 1rem;
     background-color: var(--color-secondary);
     box-shadow: var(--box-shadow-normal);
-    border-radius: 0.25rem;
+    border-radius: var(--border-radius-image);
   }
 
   @media (min-width: 768px) {
@@ -88,7 +88,7 @@ import sydTwo from '../../assets/syd-two.jpg'
     height: clamp(150px, 50vw, 225px);
     position: relative;
     background-color: var(--color-grey-light);
-    border-radius: 0.25rem;
+    border-radius: var(--border-radius-image);
   }
 
   .image-container .image-one,
@@ -111,10 +111,8 @@ import sydTwo from '../../assets/syd-two.jpg'
   }
 
   .image-container img {
-    width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 0.25rem;
   }
 </style>
 
