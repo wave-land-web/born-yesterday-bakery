@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components'
 import { Picture } from 'astro:assets'
 import anadamaImage from '../assets/focaccia.jpg'
 import sourcingAnadama from '../assets/sourcing-anadama.jpg'
@@ -28,6 +29,43 @@ import Layout from '../layouts/Layout.astro'
           <Picture src={sourcingAnadama} alt="Anadama bread" class="image" />
         </div>
       </div>
+
+      <div class="column">
+        <div id="organic-practices">
+          <h3>Organic Practices</h3>
+          <ul>
+            <li>
+              <Icon name="check" />Maintaining and improving soil fertility, structure, and
+              biodiversity.
+            </li>
+            <li>
+              <Icon name="check" />Reducing erosion and minimizing human, animal, and environmental
+              exposure to toxic materials.
+            </li>
+            <li>
+              <Icon name="check" />Investing in organic growers to ensure a sustainable future.
+            </li>
+          </ul>
+        </div>
+
+        <div id="local-support">
+          <h3>Local Support</h3>
+          <ul>
+            <li>
+              <Icon name="check" />Supporting local farmers helps build our community's economy
+              instead of enriching distant corporations.
+            </li>
+            <li>
+              <Icon name="check" />Buying local means more of the money spent on food goes directly
+              to those who grew it, strengthening our community.
+            </li>
+            <li>
+              <Icon name="check" />Using locally-sourced ingredients ensures our products are fresh
+              and of the highest quality.
+            </li>
+          </ul>
+        </div>
+      </div>
     </section>
   </main>
 </Layout>
@@ -35,18 +73,6 @@ import Layout from '../layouts/Layout.astro'
 <style>
   .section-header-custom {
     text-align: left;
-  }
-
-  .column {
-    display: grid;
-    gap: 4rem;
-  }
-
-  @media (min-width: 768px) {
-    .column {
-      grid-template-columns: repeat(2, 1fr);
-      justify-content: space-between;
-    }
   }
 
   @media (min-width: 768px) {
@@ -59,6 +85,36 @@ import Layout from '../layouts/Layout.astro'
       position: absolute;
       object-fit: cover;
       box-shadow: var(--box-shadow-normal);
+    }
+  }
+  .column {
+    margin-bottom: 6rem;
+    display: grid;
+    gap: 4rem;
+  }
+
+  @media (min-width: 768px) {
+    .column {
+      margin-bottom: 8rem;
+      grid-template-columns: repeat(2, 1fr);
+      justify-content: space-between;
+    }
+  }
+
+  .column h3 {
+    margin-bottom: 1rem;
+  }
+
+  .column ul li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    color: var(--color-grey);
+
+    [data-icon] {
+      flex-shrink: 0;
+      width: 1.5rem;
     }
   }
 </style>
