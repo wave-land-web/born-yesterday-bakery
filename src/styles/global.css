@@ -22,6 +22,7 @@
   --font-baloo-bhaijaan: 'Baloo Bhaijaan 2', sans-serif;
 
   --color-primary: #ff5758;
+  --color-primary-light: #fff4f4;
   --color-secondary: #f0f9ff;
   --color-secondary-transparent: #f0f9ffe9;
   --color-black: #252525;
@@ -37,6 +38,9 @@
   --size-lg: 2.441rem;
   --size-xl: 3.052rem;
   --size-xxl: 3.815rem;
+
+  --max-width-medium: 1024px;
+  --max-width-large: 1440px;
 
   --border-radius-image: 0.25rem;
 
@@ -101,8 +105,6 @@ body[data-overlay-displayed='true'] {
 }
 
 main {
-  max-width: 1024px;
-  margin: 0 auto;
   padding: 4rem 1rem;
 }
 
@@ -110,6 +112,12 @@ main {
   main {
     padding: 6rem 2rem;
   }
+}
+
+section,
+.container {
+  max-width: var(--max-width-medium);
+  margin: 0 auto;
 }
 
 h1 {
@@ -166,7 +174,8 @@ section:not(:last-child) {
   margin-bottom: 6rem;
 }
 
-img {
+img,
+svg {
   width: 100%;
   height: auto;
   display: block;
@@ -175,7 +184,6 @@ img {
 
 svg {
   width: clamp(var(--size-base), 10vw, var(--size-lg));
-  height: clamp(var(--size-base), 10vw, var(--size-lg));
   transition: var(--transition-normal);
 }
 

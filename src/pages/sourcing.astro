@@ -1,6 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components'
 import { Picture } from 'astro:assets'
+import farmImageOne from '../assets/farm-1.png'
 import anadamaImage from '../assets/focaccia.jpg'
 import sourcingAnadama from '../assets/sourcing-anadama.jpg'
 import HeroBanner from '../components/layout/HeroBanner.astro'
@@ -18,7 +19,7 @@ import Layout from '../layouts/Layout.astro'
     description="Our Commitment to Organic and Local Sourcing"
   />
   <main>
-    <section id="introduction">
+    <section id="introduction" class="introduction">
       <div class="column">
         <SectionHeader
           title="Why We Prioritize Organic and Local Ingredients"
@@ -67,30 +68,63 @@ import Layout from '../layouts/Layout.astro'
         </div>
       </div>
     </section>
+
+    <section id="farms" class="farms">
+      <div class="container">
+        <SectionHeader
+          title="Our Trusted Partners"
+          description="We are proud to partner with local farms that share our commitment to quality and sustainability."
+          class="section-header-custom"
+        />
+        <div class="column">
+          <!-- TODO: add carousel -->
+          <figure>
+            <Picture src={farmImageOne} alt="Rusted Rooster Farm, ME" class="image" />
+            <figcaption>
+              <p>
+                Rusted Rooster Farm, ME. Currently using their Red Fife, Turkey Red, buckwheat
+                flour, and cornmeal
+              </p>
+            </figcaption>
+          </figure>
+
+          <!-- info list -->
+          <div class="farms-info">
+            <article>
+              <Icon name="baguette" />
+              <h3>Quality</h3>
+              <p>Our commitment to sourcing only the finest organic ingredients.</p>
+            </article>
+
+            <article>
+              <Icon name="recycle" />
+              <h3>Sustainability</h3>
+              <p>Ensuring that our farming partners use environmentally-friendly practices.</p>
+            </article>
+
+            <article>
+              <Icon name="gps" />
+              <h3>Traceability</h3>
+              <p>We know exactly where our ingredients come from and how they are produced.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 </Layout>
 
 <style>
-  .section-header-custom {
-    text-align: left;
+  /* General */
+
+  [data-icon] {
+    flex-shrink: 0;
   }
 
-  @media (min-width: 768px) {
-    .image-container {
-      position: relative;
-    }
-
-    .image {
-      height: 100%;
-      position: absolute;
-      object-fit: cover;
-      box-shadow: var(--box-shadow-normal);
-    }
-  }
   .column {
     margin-bottom: 6rem;
     display: grid;
-    gap: 4rem;
+    gap: clamp(4rem, 5vw, 6rem);
   }
 
   @media (min-width: 768px) {
@@ -105,7 +139,26 @@ import Layout from '../layouts/Layout.astro'
     margin-bottom: 1rem;
   }
 
-  .column ul li {
+  /* Introduction */
+
+  .introduction .section-header-custom {
+    text-align: left;
+  }
+
+  @media (min-width: 768px) {
+    .introduction .image-container {
+      position: relative;
+    }
+
+    .introduction .image {
+      height: 100%;
+      position: absolute;
+      object-fit: cover;
+      box-shadow: var(--box-shadow-normal);
+    }
+  }
+
+  .introduction ul li {
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -113,8 +166,62 @@ import Layout from '../layouts/Layout.astro'
     color: var(--color-grey);
 
     [data-icon] {
-      flex-shrink: 0;
       width: 1.5rem;
     }
+  }
+
+  /* Farms */
+
+  .farms {
+    max-width: var(--max-width-large);
+    padding: 2rem 1rem;
+    background-color: var(--color-primary-light);
+    border-radius: var(--border-radius-image);
+    box-shadow: var(--box-shadow-normal);
+  }
+
+  @media (min-width: 768px) {
+    .farms {
+      padding: 4rem 2rem;
+    }
+  }
+
+  .farms .section-header-custom {
+    margin-bottom: 4rem;
+  }
+
+  .farms .column {
+    gap: clamp(4rem, 10vw, 8rem);
+  }
+
+  .farms figure {
+    margin: 0;
+  }
+
+  .farms figcaption p {
+    font-size: var(--font-size-sm);
+    color: var(--color-grey);
+    text-align: center;
+  }
+
+  .farms-info article {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    grid-template-rows: 50px 1fr;
+    gap: 1rem;
+  }
+
+  .farms-info h3,
+  .farms-info p {
+    grid-column-start: 2;
+  }
+
+  .farms-info [data-icon] {
+    width: clamp(2.5rem, 5vw, 3rem);
+    align-self: center;
+  }
+
+  .farms-info p {
+    color: var(--color-grey);
   }
 </style>
