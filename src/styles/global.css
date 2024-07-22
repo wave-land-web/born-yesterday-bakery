@@ -183,7 +183,6 @@ svg {
 }
 
 svg {
-  width: clamp(var(--size-base), 10vw, var(--size-lg));
   transition: var(--transition-normal);
 }
 

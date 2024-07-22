@@ -20,7 +20,7 @@ const { src: sproutedRyeImageWebp } = await getImage({
 >
   <div class="scrim"></div>
   <div class="splash-content">
-    <Icon class="logo" name="logo" />
+    <Icon name="logo" />
     <p>Sourdough baked goods made with local, organic & ancient grains in Western Maine</p>
     <div class="splace-ctas">
       <button class="site-cta">Enter Site</button>
@@ -81,9 +81,9 @@ const { src: sproutedRyeImageWebp } = await getImage({
     text-align: center;
   }
 
-  .splash-content .logo {
+  .splash-content [data-icon='logo'] {
     width: clamp(100px, 80%, 375px);
-    height: auto;
+    margin: 0 auto;
   }
 
   .splash-content p {
@@ -134,7 +134,11 @@ const { src: sproutedRyeImageWebp } = await getImage({
     gap: var(--size-base);
   }
 
-  .splash-icons a:hover svg {
+  .splash-icons [data-icon] {
+    width: clamp(var(--size-base), 10vw, var(--size-lg));
+  }
+
+  .splash-icons a:hover [data-icon] {
     color: var(--color-primary);
   }
 </style>
