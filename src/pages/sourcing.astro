@@ -1,7 +1,9 @@
 ---
 import { Icon } from 'astro-icon/components'
 import { Picture } from 'astro:assets'
-import farmImageOne from '../assets/farm-1.png'
+import farmImageOne from '../assets/farm-1.jpg'
+import farmImageTwo from '../assets/farm-2.jpg'
+import farmImageThree from '../assets/farm-3.jpg'
 import anadamaImage from '../assets/focaccia.jpg'
 import sourcingAnadama from '../assets/sourcing-anadama.jpg'
 import HeroBanner from '../components/layout/HeroBanner.astro'
@@ -77,31 +79,45 @@ import Layout from '../layouts/Layout.astro'
           class="section-header-custom"
         />
         <div class="column">
-          <!-- TODO: add carousel -->
-          <figure>
-            <Picture src={farmImageOne} alt="Rusted Rooster Farm, ME" class="image" />
-            <figcaption>
-              <p>
-                Rusted Rooster Farm, ME. Currently using their Red Fife, Turkey Red, buckwheat
-                flour, and cornmeal
-              </p>
-            </figcaption>
-          </figure>
+          <!-- Swiper -->
+          <div class="swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <Picture src={farmImageOne} alt="Rusted Rooster Farm, ME" />
+              </div>
+              <div class="swiper-slide">
+                <Picture src={farmImageTwo} alt="Rusted Rooster Farm, ME" />
+              </div>
+              <div class="swiper-slide">
+                <Picture src={farmImageThree} alt="Rusted Rooster Farm, ME" />
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
 
-          <!-- info list -->
+            <div class="swiper-captions">
+              <p class="active">
+                Rusted Rooster Farm, ME. Currently using their Red Fife, Turkey Red, buckwheat
+                flour, and cornmeal.
+              </p>
+              <p>
+                Two Hands Farm, ME. Carries our Spelt country loaf, milk buns, baguettes & sourdough
+                chocolate chip cookies.
+              </p>
+              <p>Morning Glory Farm, ME. CSA farm that carries our breads and pastries.</p>
+            </div>
+          </div>
+
           <div class="farms-info">
             <article>
               <Icon name="baguette" />
               <h3>Quality</h3>
               <p>Our commitment to sourcing only the finest organic ingredients.</p>
             </article>
-
             <article>
               <Icon name="recycle" />
               <h3>Sustainability</h3>
               <p>Ensuring that our farming partners use environmentally-friendly practices.</p>
             </article>
-
             <article>
               <Icon name="gps" />
               <h3>Traceability</h3>
@@ -137,6 +153,10 @@ import Layout from '../layouts/Layout.astro'
 
   .column h3 {
     margin-bottom: 1rem;
+  }
+
+  .column li {
+    font-size: clamp(var(--size-xs), 5vw, var(--size-sm));
   }
 
   /* Introduction */
@@ -194,26 +214,73 @@ import Layout from '../layouts/Layout.astro'
     gap: clamp(4rem, 10vw, 8rem);
   }
 
-  .farms figure {
-    margin: 0;
+  /* Swiper */
+
+  .swiper {
+    min-width: 0;
+    max-width: 100%;
+    align-self: center;
+
+    --swiper-pagination-color: var(--color-white);
+    --swiper-pagination-bullet-size: 1rem;
+    --swiper-pagination-bullet-width: 1rem;
+    --swiper-pagination-bullet-height: 1rem;
+    --swiper-pagination-bullet-inactive-color: var(--color-black);
+    --swiper-pagination-bullet-inactive-opacity: 0.75;
+    --swiper-pagination-bullet-horizontal-gap: 0.5rem;
   }
 
-  .farms figcaption p {
-    font-size: var(--font-size-sm);
+  .swiper-slide {
+    border-radius: var(--border-radius-image);
+    box-shadow: var(--box-shadow-normal);
+  }
+
+  .swiper-captions {
+    margin-top: 1rem;
     color: var(--color-grey);
+  }
+
+  .swiper-captions p {
+    display: none;
+    opacity: 0;
+    font-size: var(--size-xs);
     text-align: center;
+    transition: var(--transition-long);
+    transition-property: opacity display transform;
+
+    @starting-style {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .swiper-captions p.active {
+    display: block;
+    opacity: 1;
+
+    @starting-style {
+      opacity: 0;
+      transform: translateY(0.25rem);
+    }
   }
 
   .farms-info article {
     display: grid;
     grid-template-columns: 50px 1fr;
     grid-template-rows: 50px 1fr;
+    align-items: center;
     gap: 1rem;
+    margin-bottom: 1rem;
   }
 
   .farms-info h3,
   .farms-info p {
     grid-column-start: 2;
+  }
+
+  .farms-info h3 {
+    margin-bottom: 0;
   }
 
   .farms-info [data-icon] {
@@ -225,3 +292,28 @@ import Layout from '../layouts/Layout.astro'
     color: var(--color-grey);
   }
 </style>
+
+<script>
+  import Swiper from 'swiper'
+  import 'swiper/css/bundle'
+  import { EffectCards, Pagination } from 'swiper/modules'
+
+  // init Swiper:
+  const swiper = new Swiper('.swiper', {
+    effect: 'cards',
+    grabCursor: true,
+    modules: [EffectCards, Pagination],
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    speed: 500,
+  })
+
+  // Update captions on slide change
+  swiper.on('slideChange', () => {
+    const captions = document.querySelectorAll('.swiper-captions p')
+    captions.forEach((caption) => caption.classList.remove('active'))
+    captions[swiper.activeIndex].classList.add('active')
+  })
+</script>

@@ -25,6 +25,7 @@
   --color-primary-light: #fff4f4;
   --color-secondary: #f0f9ff;
   --color-secondary-transparent: #f0f9ffe9;
+  --color-blue: #0d9eff;
   --color-black: #252525;
   --color-white: #ffffff;
   --color-grey: #858585;
@@ -42,7 +43,7 @@
   --max-width-medium: 1024px;
   --max-width-large: 1440px;
 
-  --border-radius-image: 0.25rem;
+  --border-radius-image: 0.5rem;
 
   --transition-normal: 0.2s ease-in-out;
   --transition-long: 0.5s ease-in-out;
@@ -67,8 +68,8 @@
   .lsa {
     opacity: 0;
     visibility: hidden;
-    transition: opacity var(--transition-long), visibility var(--transition-long),
-      transform var(--transition-long);
+    transition: var(--transition-long);
+    transition-property: opacity, visibility, transform;
   }
 
   /* Handle active state */
@@ -92,6 +93,7 @@ html {
 }
 
 body {
+  overflow-x: hidden;
   font-family: var(--font-baloo-bhaijaan);
   letter-spacing: 0.75px;
   color: var(--color-black);
@@ -143,9 +145,13 @@ h5 {
   margin: 0;
 }
 
+p,
+li {
+  font-size: clamp(var(--size-xs), 5vw, var(--size-sm));
+}
+
 p {
   margin: 0 0 1rem 0;
-  font-size: var(--size-sm);
 }
 
 a {
@@ -160,7 +166,6 @@ ul {
 
 li {
   list-style-type: none;
-  font-size: var(--size-sm);
 }
 
 input,
