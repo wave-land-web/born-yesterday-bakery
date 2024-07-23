@@ -82,6 +82,7 @@
 
 html,
 body {
+  overflow-x: hidden;
   padding: 0;
   margin: 0;
 }
@@ -93,7 +94,6 @@ html {
 }
 
 body {
-  overflow-x: hidden;
   font-family: var(--font-baloo-bhaijaan);
   letter-spacing: 0.75px;
   color: var(--color-black);
@@ -102,8 +102,8 @@ body {
   text-wrap: balance;
 }
 
-body[data-overlay-displayed='true'] {
-  overflow: hidden;
+html[data-overlay-displayed='true'] {
+  overflow-y: hidden;
 }
 
 main {
