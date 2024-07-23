@@ -4,8 +4,8 @@ import { Picture } from 'astro:assets'
 import farmImageOne from '../assets/farm-1.jpg'
 import farmImageTwo from '../assets/farm-2.jpg'
 import farmImageThree from '../assets/farm-3.jpg'
-import anadamaImage from '../assets/focaccia.jpg'
-import sourcingAnadama from '../assets/sourcing-anadama.jpg'
+import focacciaImage from '../assets/focaccia.jpg'
+import anadamaTwoImage from '../assets/anadama-2.jpg'
 import HeroBanner from '../components/layout/HeroBanner.astro'
 import SectionHeader from '../components/text/SectionHeader.astro'
 import Layout from '../layouts/Layout.astro'
@@ -17,7 +17,7 @@ import Layout from '../layouts/Layout.astro'
 >
   <HeroBanner
     title="Sourcing"
-    image={anadamaImage}
+    image={focacciaImage}
     description="Our Commitment to Organic and Local Sourcing"
   />
   <main>
@@ -29,7 +29,7 @@ import Layout from '../layouts/Layout.astro'
           class="section-header-custom"
         />
         <div class="image-container">
-          <Picture src={sourcingAnadama} alt="Anadama bread" class="image" />
+          <Picture src={anadamaTwoImage} alt="Anadama bread" loading="eager" />
         </div>
       </div>
 
@@ -86,10 +86,10 @@ import Layout from '../layouts/Layout.astro'
                 <Picture src={farmImageOne} alt="Rusted Rooster Farm, ME" />
               </div>
               <div class="swiper-slide">
-                <Picture src={farmImageTwo} alt="Rusted Rooster Farm, ME" />
+                <Picture src={farmImageTwo} alt="Two Hands Farm, Me" />
               </div>
               <div class="swiper-slide">
-                <Picture src={farmImageThree} alt="Rusted Rooster Farm, ME" />
+                <Picture src={farmImageThree} alt="Morning Glory Farm, ME" />
               </div>
               <div class="swiper-pagination"></div>
             </div>
@@ -161,16 +161,16 @@ import Layout from '../layouts/Layout.astro'
 
   /* Introduction */
 
-  .introduction .section-header-custom {
-    text-align: left;
-  }
-
   @media (min-width: 768px) {
+    .introduction .section-header-custom {
+      text-align: left;
+    }
+
     .introduction .image-container {
       position: relative;
     }
 
-    .introduction .image {
+    .introduction img {
       height: 100%;
       position: absolute;
       object-fit: cover;
