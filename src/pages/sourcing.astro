@@ -1,14 +1,17 @@
 ---
 import { Icon } from 'astro-icon/components'
 import { Picture } from 'astro:assets'
+import anadamaTwoImage from '../assets/anadama-2.jpg'
 import farmImageOne from '../assets/farm-1.jpg'
 import farmImageTwo from '../assets/farm-2.jpg'
 import farmImageThree from '../assets/farm-3.jpg'
 import focacciaImage from '../assets/focaccia.jpg'
-import anadamaTwoImage from '../assets/anadama-2.jpg'
+import millOneImage from '../assets/mill-1.jpg'
+import millTwoImage from '../assets/mill-2.jpg'
 import HeroBanner from '../components/layout/HeroBanner.astro'
 import SectionHeader from '../components/text/SectionHeader.astro'
 import Layout from '../layouts/Layout.astro'
+import ThemedContainer from '../components/layout/ThemedContainer.astro'
 ---
 
 <Layout
@@ -21,6 +24,7 @@ import Layout from '../layouts/Layout.astro'
     description="Our Commitment to Organic and Local Sourcing"
   />
   <main>
+    <!-- Introduction -->
     <section id="introduction" class="introduction">
       <div class="column">
         <SectionHeader
@@ -71,8 +75,8 @@ import Layout from '../layouts/Layout.astro'
       </div>
     </section>
 
-    <section id="farms" class="farms">
-      <Icon name="triangles" />
+    <!-- Farms -->
+    <ThemedContainer color="red" isSection={true} sectionId="farms" class="themed-container-custom">
       <div class="container">
         <SectionHeader
           title="Our Trusted Partners"
@@ -94,7 +98,6 @@ import Layout from '../layouts/Layout.astro'
               </div>
               <div class="swiper-pagination"></div>
             </div>
-
             <div class="swiper-captions">
               <p class="active">
                 Rusted Rooster Farm, ME. Currently using their Red Fife, Turkey Red, buckwheat
@@ -127,7 +130,46 @@ import Layout from '../layouts/Layout.astro'
           </div>
         </div>
       </div>
-      <Icon name="triangles" />
+    </ThemedContainer>
+
+    <!-- Milling -->
+    <section id="milling" class="milling">
+      <div class="container">
+        <SectionHeader
+          title="The Milling Process"
+          description="We mill our flour in-house using locally-sourced organic grains."
+          class="section-header-custom"
+        />
+        <div class="column">
+          <article>
+            <Icon name="number-1" />
+            <h3>Stone Milling</h3>
+            <p>
+              Our traditional stone mill preserves all parts of the grain, resulting in whole grain
+              flour that is rich in nutrients and flavor. This process allows us to provide the
+              freshest flour possible, directly from our mill to your table.
+            </p>
+          </article>
+          <Picture src={millOneImage} alt="Stone mill" />
+        </div>
+      </div>
+
+      <ThemedContainer color="blue" class="themed-container-custom">
+        <div class="container">
+          <div class="column">
+            <article>
+              <Icon name="number-2" />
+              <h3>whole grain Flour</h3>
+              <p>
+                Whole grain flour includes the bran and germ, which are often removed in commercial
+                flours. This means our flour retains all the nutritious and tasty parts of the
+                grain, making our baked goods wholesome and delicious.
+              </p>
+            </article>
+            <Picture src={millTwoImage} alt="Stone mill" />
+          </div>
+        </div>
+      </ThemedContainer>
     </section>
   </main>
 </Layout>
@@ -137,6 +179,10 @@ import Layout from '../layouts/Layout.astro'
 
   [data-icon] {
     flex-shrink: 0;
+  }
+
+  .section-header-custom:not(.introduction .section-header-custom) {
+    margin-bottom: 4rem;
   }
 
   .column {
@@ -153,12 +199,43 @@ import Layout from '../layouts/Layout.astro'
     }
   }
 
-  .column h3 {
+  .column article {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    grid-template-rows: 50px 1fr;
+    align-items: center;
+    gap: 1rem;
     margin-bottom: 1rem;
+  }
+
+  .column h3,
+  .column p {
+    grid-column-start: 2;
+    align-self: flex-start;
+  }
+
+  .column [data-icon] {
+    width: clamp(2.5rem, 5vw, 3rem);
+    align-self: center;
+  }
+
+  .column p {
+    color: var(--color-grey);
+  }
+
+  .column img {
+    box-shadow: var(--box-shadow-normal);
   }
 
   .column li {
     font-size: clamp(var(--size-xs), 5vw, var(--size-sm));
+  }
+
+  /* Themed Container Styles */
+
+  .themed-container-custom .column {
+    margin-bottom: 0;
+    gap: clamp(4rem, 10vw, 8rem);
   }
 
   /* Introduction */
@@ -180,6 +257,10 @@ import Layout from '../layouts/Layout.astro'
     }
   }
 
+  .introduction h3 {
+    margin-bottom: 1rem;
+  }
+
   .introduction ul li {
     display: flex;
     align-items: center;
@@ -190,50 +271,6 @@ import Layout from '../layouts/Layout.astro'
     [data-icon] {
       width: 1.5rem;
     }
-  }
-
-  /* Farms */
-
-  .farms {
-    position: relative;
-    max-width: var(--max-width-large);
-    padding: 5rem 1rem;
-    background-color: var(--color-primary-light);
-    border-radius: var(--border-radius-image);
-  }
-
-  @media (min-width: 768px) {
-    .farms {
-      padding: 5rem 2rem;
-    }
-  }
-
-  .farms [data-icon='triangles'] {
-    position: absolute;
-    width: 10%;
-    border-radius: 0;
-  }
-
-  .farms [data-icon='triangles']:first-of-type {
-    top: -0.1rem;
-    left: -0.1rem;
-    width: 10%;
-  }
-
-  .farms [data-icon='triangles']:last-of-type {
-    bottom: -0.1rem;
-    right: -0.1rem;
-    width: 10%;
-    transform: rotate(180deg);
-  }
-
-  .farms .section-header-custom {
-    margin-bottom: 4rem;
-  }
-
-  .farms .column {
-    margin-bottom: 0;
-    gap: clamp(4rem, 10vw, 8rem);
   }
 
   /* Swiper */
@@ -287,31 +324,13 @@ import Layout from '../layouts/Layout.astro'
     }
   }
 
-  .farms-info article {
-    display: grid;
-    grid-template-columns: 50px 1fr;
-    grid-template-rows: 50px 1fr;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
+  /* Milling */
+  .milling {
+    max-width: var(--max-width-large);
   }
 
-  .farms-info h3,
-  .farms-info p {
-    grid-column-start: 2;
-  }
-
-  .farms-info h3 {
-    margin-bottom: 0;
-  }
-
-  .farms-info [data-icon] {
-    width: clamp(2.5rem, 5vw, 3rem);
-    align-self: center;
-  }
-
-  .farms-info p {
-    color: var(--color-grey);
+  .milling .section-header-custom {
+    max-width: 500px;
   }
 </style>
 

@@ -1,0 +1,65 @@
+---
+import { Icon } from 'astro-icon/components'
+
+export interface Props {
+  color: string | 'red' | 'blue'
+  isSection?: boolean
+  sectionId?: string
+  class?: string
+}
+
+const { color, isSection, sectionId, class: className } = Astro.props
+---
+
+{
+  isSection ? (
+    <section id={sectionId} class={`${className} themed-container`} data-color={color}>
+      <Icon name="triangles" />
+      <slot />
+      <Icon name="triangles" />
+    </section>
+  ) : (
+    <div class={`${className} themed-container`} data-color={color}>
+      <Icon name="triangles" />
+      <slot />
+      <Icon name="triangles" />
+    </div>
+  )
+}
+
+<style>
+  .themed-container {
+    position: relative;
+    max-width: var(--max-width-large);
+    padding: 5rem 1rem;
+    border-radius: var(--border-radius-image);
+  }
+
+  @media (min-width: 768px) {
+    .themed-container {
+      padding: 5rem 2rem;
+    }
+  }
+
+  .themed-container[data-color='red'] {
+    background-color: var(--color-primary-light);
+  }
+  .themed-container[data-color='blue'] {
+    background-color: var(--color-secondary);
+  }
+
+  .themed-container [data-icon='triangles'] {
+    position: absolute;
+    width: 10%;
+    border-radius: 0;
+  }
+  .themed-container [data-icon='triangles']:first-of-type {
+    top: -0.1rem;
+    left: -0.1rem;
+  }
+  .themed-container [data-icon='triangles']:last-of-type {
+    bottom: -0.1rem;
+    right: -0.1rem;
+    transform: rotate(180deg);
+  }
+</style>
