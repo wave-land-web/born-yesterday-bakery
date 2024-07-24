@@ -72,6 +72,7 @@ import Layout from '../layouts/Layout.astro'
     </section>
 
     <section id="farms" class="farms">
+      <Icon name="triangles" />
       <div class="container">
         <SectionHeader
           title="Our Trusted Partners"
@@ -126,6 +127,7 @@ import Layout from '../layouts/Layout.astro'
           </div>
         </div>
       </div>
+      <Icon name="triangles" />
     </section>
   </main>
 </Layout>
@@ -193,17 +195,36 @@ import Layout from '../layouts/Layout.astro'
   /* Farms */
 
   .farms {
+    position: relative;
     max-width: var(--max-width-large);
-    padding: 2rem 1rem;
+    padding: 5rem 1rem;
     background-color: var(--color-primary-light);
     border-radius: var(--border-radius-image);
-    box-shadow: var(--box-shadow-normal);
   }
 
   @media (min-width: 768px) {
     .farms {
-      padding: 4rem 2rem;
+      padding: 5rem 2rem;
     }
+  }
+
+  .farms [data-icon='triangles'] {
+    position: absolute;
+    width: 10%;
+    border-radius: 0;
+  }
+
+  .farms [data-icon='triangles']:first-of-type {
+    top: -0.1rem;
+    left: -0.1rem;
+    width: 10%;
+  }
+
+  .farms [data-icon='triangles']:last-of-type {
+    bottom: -0.1rem;
+    right: -0.1rem;
+    width: 10%;
+    transform: rotate(180deg);
   }
 
   .farms .section-header-custom {
@@ -211,6 +232,7 @@ import Layout from '../layouts/Layout.astro'
   }
 
   .farms .column {
+    margin-bottom: 0;
     gap: clamp(4rem, 10vw, 8rem);
   }
 
