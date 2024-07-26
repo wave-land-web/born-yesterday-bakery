@@ -79,6 +79,46 @@
     visibility: visible;
     transform: none;
   }
+
+  /* Slide up */
+  .lsa.lsa-slide-up {
+    transform: translateY(1rem);
+  }
+
+  /* Slide down */
+  .lsa.lsa-slide-down {
+    transform: translateY(-1rem);
+  }
+
+  /* Slide left */
+  .lsa.lsa-slide-left {
+    transform: translateX(1rem);
+  }
+
+  /* Slide right */
+  .lsa.lsa-slide-right {
+    transform: translateX(-1rem);
+  }
+
+  /* Slide down right */
+  .lsa.lsa-slide-down-right {
+    transform: translate(-1rem, -1rem);
+  }
+
+  /* Slide down left */
+  .lsa.lsa-slide-down-left {
+    transform: translate(1rem, -1rem);
+  }
+
+  /* Slide up right */
+  .lsa.lsa-slide-up-right {
+    transform: translate(-1rem, 1rem);
+  }
+
+  /* Slide up left */
+  .lsa.lsa-slide-up-left {
+    transform: translate(1rem, 1rem);
+  }
 }
 
 html,

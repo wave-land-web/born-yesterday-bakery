@@ -32,14 +32,14 @@ import ThemedContainer from '../components/layout/ThemedContainer.astro'
         <SectionHeader
           title="Why We Prioritize Organic and Local Ingredients"
           description="We believe that by investing in our community and supporting sustainable practices, we can create the best bread while contributing to a healthier environment and economy."
-          class="section-header-custom"
+          class="section-header-custom lsa no-repeat"
         />
-        <div class="image-container">
+        <div class="image-container lsa no-repeat">
           <Picture src={anadamaTwoImage} alt="Anadama bread" loading="eager" />
         </div>
       </div>
 
-      <div class="column">
+      <div class="column lsa no-repeat">
         <div id="organic-practices">
           <h3>Organic Practices</h3>
           <ul>
@@ -78,7 +78,12 @@ import ThemedContainer from '../components/layout/ThemedContainer.astro'
     </section>
 
     <!-- Farms -->
-    <ThemedContainer color="red" isSection={true} sectionId="farms" class="themed-container-custom">
+    <ThemedContainer
+      color="red"
+      isSection={true}
+      sectionId="farms"
+      class="themed-container-custom lsa no-repeat"
+    >
       <div class="container">
         <SectionHeader
           title="Our Trusted Partners"
@@ -140,9 +145,9 @@ import ThemedContainer from '../components/layout/ThemedContainer.astro'
         <SectionHeader
           title="The Milling Process"
           description="We mill our flour in-house using locally-sourced organic grains."
-          class="section-header-custom"
+          class="section-header-custom lsa no-repeat"
         />
-        <div class="column">
+        <div class="column lsa no-repeat">
           <article>
             <Icon name="number-1" />
             <h3>Stone Milling</h3>
@@ -156,7 +161,7 @@ import ThemedContainer from '../components/layout/ThemedContainer.astro'
         </div>
       </div>
 
-      <ThemedContainer color="blue" class="themed-container-custom">
+      <ThemedContainer color="blue" class="themed-container-custom lsa no-repeat">
         <div class="container">
           <div class="column">
             <article>
@@ -179,16 +184,16 @@ import ThemedContainer from '../components/layout/ThemedContainer.astro'
       <SectionHeader
         title="Our Sourdough Process"
         description="Everything we make is created with a sourdough starter."
-        class="section-header-custom"
+        class="section-header-custom lsa no-repeat"
       />
       <div class="process-content">
         <Icon name="curved-arrow" />
         <div class="process-row">
-          <div class="fermentation">
+          <div class="fermentation lsa no-repeat">
             <h3>Natural Fermentation</h3>
             <p>Our slower fermentation is the secret sauce behind the bread's unique juicy tang.</p>
           </div>
-          <figure class="alien">
+          <figure class="alien lsa no-repeat">
             <Picture
               src={alientGif}
               alt="Alien coming out of a guy's stomach from the movie, 'Alien'"
@@ -200,11 +205,11 @@ import ThemedContainer from '../components/layout/ThemedContainer.astro'
         </div>
 
         <div class="process-row">
-          <div class="results">
+          <div class="results lsa no-repeat">
             <h3>The Results?</h3>
           </div>
           <div>
-            <div class="pill-container">
+            <div class="pill-container lsa no-repeat">
               <div class="pill">
                 <span>OUT-OF-BODY EXPERIENCE</span>
               </div>
@@ -215,7 +220,7 @@ import ThemedContainer from '../components/layout/ThemedContainer.astro'
                 <span>SPIRITUAL GROWTH</span>
               </div>
             </div>
-            <figure class="truman-show">
+            <figure class="truman-show lsa no-repeat">
               <Picture src={trumanShowGif} alt="Jim Carrey in The Truman Show" />
               <figcaption>
                 <p>Finding True Happiness</p>
@@ -227,7 +232,7 @@ import ThemedContainer from '../components/layout/ThemedContainer.astro'
     </section>
 
     <!-- Call to action -->
-    <ThemedContainer color="blue" isSection={true} sectionId="call-to-action">
+    <ThemedContainer color="blue" isSection={true} sectionId="call-to-action" class="lsa no-repeat">
       <SectionHeader
         title="Supporting a B-read-er Future"
         description="Your support allows us to open doors behind us and pay it forward to the communities we care about."
@@ -396,6 +401,7 @@ import ThemedContainer from '../components/layout/ThemedContainer.astro'
   }
 
   /* Milling */
+  
   .milling {
     max-width: var(--max-width-large);
   }
@@ -514,7 +520,7 @@ import ThemedContainer from '../components/layout/ThemedContainer.astro'
     }
   }
 
-  @media (min-width: 1244px) {
+  @media (min-width: 1280px) {
     .process-content .process-row:last-of-type {
       justify-content: space-between;
     }
