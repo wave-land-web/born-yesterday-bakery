@@ -8,6 +8,8 @@ import farmImageThree from '../assets/farm-3.jpg'
 import focacciaImage from '../assets/focaccia.jpg'
 import millOneImage from '../assets/mill-1.jpg'
 import millTwoImage from '../assets/mill-2.jpg'
+import alientGif from '../assets/alien.gif'
+import trumanShowGif from '../assets/truman-show.gif'
 import HeroBanner from '../components/layout/HeroBanner.astro'
 import SectionHeader from '../components/text/SectionHeader.astro'
 import Layout from '../layouts/Layout.astro'
@@ -171,6 +173,58 @@ import ThemedContainer from '../components/layout/ThemedContainer.astro'
         </div>
       </ThemedContainer>
     </section>
+
+    <!-- Process -->
+    <section id="process" class="process">
+      <SectionHeader
+        title="Our Sourdough Process"
+        description="Everything we make is created with a sourdough starter."
+        class="section-header-custom"
+      />
+      <div class="process-content">
+        <Icon name="curved-arrow" />
+        <div class="process-row">
+          <div class="fermentation">
+            <h3>Natural Fermentation</h3>
+            <p>Our slower fermentation is the secret sauce behind the bread's unique juicy tang.</p>
+          </div>
+          <figure class="alien">
+            <Picture
+              src={alientGif}
+              alt="Alien coming out of a guy's stomach from the movie, 'Alien'"
+            />
+            <figcaption>
+              <p>Naturally fermented, happy gut!</p>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="process-row">
+          <div class="results">
+            <h3>The Results?</h3>
+          </div>
+          <div>
+            <div class="pill-container">
+              <div class="pill">
+                <span>OUT-OF-BODY EXPERIENCE</span>
+              </div>
+              <div class="pill">
+                <span>MOUTH-WATERING BLISS</span>
+              </div>
+              <div class="pill">
+                <span>SPIRITUAL GROWTH</span>
+              </div>
+            </div>
+            <figure class="truman-show">
+              <Picture src={trumanShowGif} alt="Jim Carrey in The Truman Show" />
+              <figcaption>
+                <p>Finding True Happiness</p>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 </Layout>
 
@@ -331,6 +385,187 @@ import ThemedContainer from '../components/layout/ThemedContainer.astro'
 
   .milling .section-header-custom {
     max-width: 500px;
+  }
+
+  /* Process */
+
+  .process .section-header-custom {
+    max-width: none;
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .process-content {
+    position: relative;
+  }
+
+  .process-content .process-row {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    .process-content .process-row {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .process-content .process-row:first-of-type {
+    position: absolute;
+    top: 6rem;
+    right: 0;
+    width: 100%;
+  }
+
+  @media (min-width: 1024px) {
+    .process-content .process-row:first-of-type {
+      top: 0;
+    }
+  }
+
+  .process-content .fermentation,
+  .process-content .alien,
+  .process-content .truman-show {
+    width: 75%;
+  }
+
+  @media (min-width: 768px) {
+    .process-content .fermentation,
+    .process-content .alien,
+    .process-content .truman-show {
+      width: 100%;
+    }
+  }
+
+  .process-content .fermentation {
+    max-width: 396px;
+    text-align: end;
+  }
+
+  @media (min-width: 1024px) {
+    .process-content .fermentation {
+      rotate: -6deg;
+      text-align: center;
+    }
+  }
+
+  .process-content .fermentation h3 {
+    margin-bottom: 1rem;
+  }
+
+  .process-content .fermentation p {
+    margin: 0 auto;
+    font-size: clamp(var(--size-xs), 2vw, var(--size-sm));
+    color: var(--color-grey);
+  }
+
+  .process-content h3 {
+    font-size: clamp(var(--size-base), 5vw, var(--size-lg));
+  }
+
+  .process-content figure {
+    max-width: 300px;
+    margin: 0;
+  }
+
+  .process-content img {
+    margin-bottom: 1rem;
+    box-shadow: var(--box-shadow-normal);
+  }
+
+  .process-content figcaption p {
+    font-size: clamp(var(--size-xxs), 5vw, var(--size-xs));
+    text-align: center;
+    color: var(--color-grey);
+  }
+
+  .process-content .process-row:last-of-type {
+    position: absolute;
+    top: 40rem;
+    align-items: flex-start;
+  }
+
+  @media (min-width: 1024px) {
+    .process-content .process-row:last-of-type {
+      flex-direction: row-reverse;
+      justify-content: space-around;
+    }
+  }
+
+  @media (min-width: 1244px) {
+    .process-content .process-row:last-of-type {
+      justify-content: space-between;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .process-content .results {
+      rotate: 6deg;
+    }
+  }
+
+  .pill-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .pill {
+    width: fit-content;
+    padding: 0.5rem 1rem;
+    background-color: var(--color-secondary);
+    border: 1px solid var(--color-black);
+    border-radius: 30px;
+    box-shadow: 0.25rem 0.25rem 0 var(--color-black);
+    font-size: clamp(var(--size-xxs), 2vw, var(--size-xs));
+    transition: var(--transition-normal);
+  }
+
+  .pill:nth-of-type(2) {
+    background-color: var(--color-primary-light);
+  }
+
+  .pill:nth-of-type(3) {
+    background-color: var(--color-yellow-light);
+  }
+
+  @media (min-width: 1024px) {
+    .pill-container {
+      gap: 4rem;
+      margin-bottom: 6rem;
+    }
+
+    .pill:nth-of-type(1) {
+      rotate: 12deg;
+      translate: -6rem 0;
+    }
+
+    .pill:nth-of-type(2) {
+      rotate: -6deg;
+      translate: 6rem 0;
+      background-color: var(--color-primary-light);
+    }
+
+    .pill:nth-of-type(3) {
+      rotate: -2deg;
+      background-color: var(--color-yellow-light);
+    }
+
+    .pill:hover {
+      rotate: 0deg;
+    }
+  }
+
+  .process [data-icon='curved-arrow'] {
+    max-width: 400px;
+    margin: 0 auto;
   }
 </style>
 
