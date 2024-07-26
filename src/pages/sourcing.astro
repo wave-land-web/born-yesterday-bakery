@@ -225,6 +225,23 @@ import ThemedContainer from '../components/layout/ThemedContainer.astro'
         </div>
       </div>
     </section>
+
+    <!-- Call to action -->
+    <ThemedContainer color="blue" isSection={true} sectionId="call-to-action">
+      <SectionHeader
+        title="Supporting a B-read-er Future"
+        description="Your support allows us to open doors behind us and pay it forward to the communities we care about."
+      />
+      <div class="call-to-action-info">
+        <p>Join us in creating a better future, one loaf at a time.</p>
+        <div class="ctas">
+          <a href="/contact" class="site-cta" aria-label="Reach Out">Reach Out</a>
+          <a href="https://bornyesterdaybakery.square.site/" class="site-cta" aria-label="Order Now"
+            >Order Now</a
+          >
+        </div>
+      </div>
+    </ThemedContainer>
   </main>
 </Layout>
 
@@ -566,6 +583,42 @@ import ThemedContainer from '../components/layout/ThemedContainer.astro'
   .process [data-icon='curved-arrow'] {
     max-width: 400px;
     margin: 0 auto;
+  }
+
+  /* Call to action */
+
+  .call-to-action-info p {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: clamp(var(--size-xs), 2vw, var(--size-base));
+    margin-bottom: 2rem;
+  }
+
+  .ctas .site-cta {
+    font-size: clamp(var(--size-xs), 5vw, var(--size-base));
+    border: 2px solid var(--color-primary);
+  }
+
+  .ctas a.site-cta:hover {
+    color: var(--color-primary);
+    background-color: transparent;
+  }
+
+  .ctas a.site-cta:last-of-type {
+    color: var(--color-primary);
+    background-color: transparent;
+    border: 2px solid var(--color-primary);
+  }
+
+  .ctas a.site-cta:last-of-type:hover {
+    color: var(--color-secondary);
+    background-color: var(--color-primary);
   }
 </style>
 
