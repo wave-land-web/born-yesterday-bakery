@@ -25,6 +25,18 @@ import ThemedContainer from '../components/layout/ThemedContainer.astro'
     image={focacciaImage}
     description="Our Commitment to Organic and Local Sourcing"
   />
+  <!-- Vertical Divider -->
+  <div class="background-mask">
+    <div class="guides-background">
+      <div class="guides">
+        <div class="guides-container">
+          <div class="guide"></div>
+          <div class="guide"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <main>
     <!-- Introduction -->
     <section id="introduction" class="introduction">
@@ -253,6 +265,65 @@ import ThemedContainer from '../components/layout/ThemedContainer.astro'
 <style>
   /* General */
 
+  body {
+    position: relative;
+    overflow-y: hidden;
+  }
+
+  .background-mask {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .background-mask {
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      left: 0;
+    }
+
+    .guides-background {
+      position: relative;
+      height: 100%;
+      max-height: none;
+      width: 100%;
+      top: 0;
+      left: 0;
+    }
+
+    .guides {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+    }
+
+    .guides-container {
+      display: grid;
+      grid: 1fr / repeat(2, 1fr);
+      position: relative;
+      max-width: var(--max-width-large);
+      height: 100%;
+      margin: 0 auto;
+    }
+
+    .guide:nth-last-of-type(1) {
+      width: 1px;
+      background: linear-gradient(
+        180deg,
+        var(--color-grey-dash),
+        var(--color-grey-dash) 50%,
+        transparent 0,
+        transparent
+      );
+      background-size: 1px 8px;
+    }
+  }
+
   [data-icon] {
     flex-shrink: 0;
   }
@@ -401,7 +472,7 @@ import ThemedContainer from '../components/layout/ThemedContainer.astro'
   }
 
   /* Milling */
-  
+
   .milling {
     max-width: var(--max-width-large);
   }
