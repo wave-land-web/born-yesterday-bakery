@@ -358,7 +358,6 @@ import ThemedContainer from '../components/layout/ThemedContainer.astro'
   .column h3,
   .column p {
     grid-column-start: 2;
-    align-self: flex-start;
   }
 
   .column [data-icon] {
@@ -367,6 +366,7 @@ import ThemedContainer from '../components/layout/ThemedContainer.astro'
   }
 
   .column p {
+    align-self: flex-start;
     color: var(--color-grey);
   }
 
@@ -424,7 +424,7 @@ import ThemedContainer from '../components/layout/ThemedContainer.astro'
 
   .swiper {
     min-width: 0;
-    max-width: 100%;
+    max-width: 85%;
     align-self: center;
 
     --swiper-pagination-color: var(--color-white);
@@ -434,6 +434,12 @@ import ThemedContainer from '../components/layout/ThemedContainer.astro'
     --swiper-pagination-bullet-inactive-color: var(--color-black);
     --swiper-pagination-bullet-inactive-opacity: 0.75;
     --swiper-pagination-bullet-horizontal-gap: 0.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .swiper {
+      max-width: 100%;
+    }
   }
 
   .swiper-slide {
@@ -498,7 +504,7 @@ import ThemedContainer from '../components/layout/ThemedContainer.astro'
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 2rem;
+    gap: 1rem;
   }
 
   @media (min-width: 1024px) {
@@ -554,12 +560,12 @@ import ThemedContainer from '../components/layout/ThemedContainer.astro'
 
   .process-content .fermentation p {
     margin: 0 auto;
-    font-size: clamp(var(--size-xs), 2vw, var(--size-sm));
+    font-size: clamp(var(--size-xxs), 2vw, var(--size-sm));
     color: var(--color-grey);
   }
 
   .process-content h3 {
-    font-size: clamp(var(--size-base), 5vw, var(--size-lg));
+    font-size: clamp(var(--size-sm), 5vw, var(--size-lg));
   }
 
   .process-content figure {
@@ -573,7 +579,7 @@ import ThemedContainer from '../components/layout/ThemedContainer.astro'
   }
 
   .process-content figcaption p {
-    font-size: clamp(var(--size-xxs), 5vw, var(--size-xs));
+    font-size: clamp(var(--size-xxs), 2vw, var(--size-xs));
     text-align: center;
     color: var(--color-grey);
   }

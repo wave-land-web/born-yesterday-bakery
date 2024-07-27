@@ -122,7 +122,7 @@ import { Icon } from 'astro-icon/components'
   .mobile-nav-overlay ul li {
     opacity: 0;
     transition: all var(--transition-normal);
-    font-size: var(--size-lg);
+    font-size: clamp(var(--size-base), 10vw, var(--size-lg));
   }
 
   .mobile-nav-overlay ul li:hover {
@@ -142,7 +142,7 @@ import { Icon } from 'astro-icon/components'
     justify-content: center;
     align-items: center;
     gap: 2rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
   }
 
   .icons svg {
