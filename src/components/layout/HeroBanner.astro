@@ -50,6 +50,8 @@ const { src: backgroundImageWebp } = await getImage({
     gap: 1rem;
     background-color: var(--color-secondary);
     color: var(--color-white);
+    text-shadow: clamp(0.05rem, 2vw, 0.1rem) clamp(0.05rem, 2vw, 0.1rem) 0 var(--color-black);
+    font-weight: bold;
   }
 
   @media only screen and (max-device-width: 1366px) {
