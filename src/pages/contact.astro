@@ -48,20 +48,6 @@ import Layout from '../layouts/Layout.astro'
             </a>
           </p>
         </div>
-        <div>
-          <h3>Visit Us</h3>
-          <p>221 Barker Road Bethel, ME</p>
-          <p>
-            <a
-              href="https://maps.app.goo.gl/Zi8c93ZntshAJUiNA"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Google Maps"
-              >View on Map
-              <Icon name="arrow-top-right" />
-            </a>
-          </p>
-        </div>
       </aside>
     </section>
   </main>
@@ -200,7 +186,7 @@ import Layout from '../layouts/Layout.astro'
   }
 
   .contact-info h3,
-  .contact-info p {
+  .contact-info p:not(:last-of-type) {
     margin-bottom: 0.75rem;
     text-align: left;
   }
@@ -213,6 +199,10 @@ import Layout from '../layouts/Layout.astro'
   .contact-info p {
     font-size: var(--size-xs);
     color: var(--color-grey);
+  }
+
+  .contact-info p:last-of-type {
+    margin-bottom: 0;
   }
 
   .contact-info a {
