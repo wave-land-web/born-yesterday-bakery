@@ -1,16 +1,17 @@
 ---
 import { Picture } from 'astro:assets'
 import fareShareFood from '../../assets/fare-share-food.webp'
-import goodFoodBethel from '../../assets/good-food-bethel.png'
+import geminiCafe from '../../assets/gemini-cafe.webp'
 import morningGloryFarm from '../../assets/morning-glory-farm.png'
 import mountainSocial from '../../assets/mountain-social.webp'
-import tableBar from '../../assets/table-bar.jpg'
+import newSpokeFarm from '../../assets/new-spoke-farm.png'
+import spiceAndGrain from '../../assets/spice-and-grain.png'
 
 const companyData = [
   {
-    name: 'Good Food Store',
-    url: 'https://www.goodfoodbethel.com/',
-    logo: goodFoodBethel,
+    name: 'Mountain Social Kitchen & Bar',
+    url: 'https://www.socialbarharbor.com/mountain-social-bethel',
+    logo: mountainSocial,
   },
   {
     name: 'Fare Share Food Co-op',
@@ -18,19 +19,29 @@ const companyData = [
     logo: fareShareFood,
   },
   {
-    name: 'Mountain Social Kitchen & Bar',
-    url: 'https://www.socialbarharbor.com/mountain-social-bethel',
-    logo: mountainSocial,
+    name: 'Spice & Grain',
+    url: 'https://spiceandgrain.net/',
+    logo: spiceAndGrain,
+  },
+  {
+    name: 'Gemini Cafe',
+    url: 'https://www.thegeminicafe.com/',
+    logo: geminiCafe,
+  },
+  {
+    name: 'Local Food Connection',
+    url: 'https://www.facebook.com/groups/bethelmefood/',
+    logo: null,
+  },
+  {
+    name: 'New Spoke Farm',
+    url: 'https://www.newspokefarm.com/the-csa',
+    logo: newSpokeFarm,
   },
   {
     name: 'Morning Glory Farm',
     url: 'https://www.morninggloryfarmmaine.com/',
     logo: morningGloryFarm,
-  },
-  {
-    name: 'Table Bar',
-    url: 'https://www.tablebar207.com/',
-    logo: tableBar,
   },
 ]
 ---
@@ -38,13 +49,33 @@ const companyData = [
 <div class="company-logos">
   {
     companyData.map((company) => {
-      return (
-        <div class="logo">
-          <a href={company.url} target="_blank" rel="noopener noreferrer" aria-label={company.name}>
-            <Picture src={company.logo} formats={['avif', 'webp']} alt={company.name} />
-          </a>
-        </div>
-      )
+      if (company.logo) {
+        return (
+          <div class="logo">
+            <a
+              href={company.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={company.name}
+            >
+              <Picture src={company.logo} formats={['avif', 'webp']} alt={company.name} />
+            </a>
+          </div>
+        )
+      } else {
+        return (
+          <div class="logo no-logo">
+            <a
+              href={company.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={company.name}
+            >
+              {company.name}
+            </a>
+          </div>
+        )
+      }
     })
   }
 </div>
@@ -53,7 +84,7 @@ const companyData = [
   .company-logos {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: center;
     gap: 3rem;
     margin-bottom: 6rem;
     padding: 1rem 0;
@@ -62,11 +93,31 @@ const companyData = [
   .logo {
     width: 9rem;
     height: 9rem;
+    border-radius: 50%;
+    transition: var(--transition-normal);
+  }
+
+  .logo:hover {
+    transform: scale(1.05);
   }
 
   .logo:nth-of-type(2) {
-    background-color: var(--color-black);
-    border-radius: 50%;
+    background-color: #000000;
+  }
+  .logo:nth-of-type(3) {
+    background-color: #44b0c4;
+  }
+  .logo:nth-of-type(6) {
+    background-color: #000000;
+  }
+
+  .logo.no-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: var(--font-bobby-soft);
+    background-color: var(--color-secondary);
   }
 
   .logo img {
