@@ -135,6 +135,13 @@ html {
   scrollbar-color: var(--color-secondary) var(--color-black);
 }
 
+html[data-current-url='/'] li[data-path='home'],
+html[data-current-url^='/sourcing'] li[data-path='sourcing'],
+html[data-current-url^='/order'] li[data-path='order'],
+html[data-current-url^='/contact'] li[data-path='contact'] {
+  color: var(--color-primary);
+}
+
 body {
   font-family: var(--font-baloo-bhaijaan);
   letter-spacing: 0.75px;

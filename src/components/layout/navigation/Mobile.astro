@@ -10,10 +10,12 @@ import { Icon } from 'astro-icon/components'
 
 <div class="mobile-nav-overlay">
   <ul>
-    <li><a href="/menu">Menu</a></li>
-    <li><a href="/sourcing">Sourcing</a></li>
-    <li><a href="https://bornyesterdaybakery.square.site/" aria-label="order">Order</a></li>
-    <li><a href="/contact" aria-label="contact">Contact</a></li>
+    <li data-path="home"><a href="/">Home</a></li>
+    <li data-path="sourcing"><a href="/sourcing">Sourcing</a></li>
+    <li data-path="order">
+      <a href="https://bornyesterdaybakery.square.site/" aria-label="order">Order</a>
+    </li>
+    <li data-path="contact"><a href="/contact" aria-label="contact">Contact</a></li>
     <div class="icons">
       <a
         href="https://www.instagram.com/bornyesterdaybakery/"

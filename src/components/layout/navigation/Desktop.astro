@@ -1,11 +1,9 @@
 ---
 import DesktopLogo from '../../logo/Desktop.astro'
-
-const currentPath = Astro.url.pathname
 ---
 
-<ul class="desktop-nav" data-current-url={currentPath}>
-  <li data-path="menu"><a href="/menu">Menu</a></li>
+<ul class="desktop-nav">
+  <li data-path="home"><a href="/">Home</a></li>
   <li data-path="sourcing"><a href="/sourcing">Sourcing</a></li>
 
   <li class="logo">
@@ -17,13 +15,6 @@ const currentPath = Astro.url.pathname
 </ul>
 
 <style>
-  .desktop-nav[data-current-url^='/menu'] li[data-path='menu'],
-  .desktop-nav[data-current-url^='/sourcing'] li[data-path='sourcing'],
-  .desktop-nav[data-current-url^='/order'] li[data-path='order'],
-  .desktop-nav[data-current-url^='/contact'] li[data-path='contact'] {
-    color: var(--color-primary);
-  }
-
   .desktop-nav {
     display: none;
   }
