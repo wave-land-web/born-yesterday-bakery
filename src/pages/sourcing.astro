@@ -2,9 +2,13 @@
 import { Icon } from 'astro-icon/components'
 import { Picture } from 'astro:assets'
 import anadamaTwoImage from '../assets/anadama-2.jpg'
-import farmImageOne from '../assets/farm-1.jpg'
-import farmImageTwo from '../assets/farm-2.jpg'
-import farmImageThree from '../assets/farm-3.jpg'
+import farmImageOne from '../assets/sourcing_rusted-rooster.jpg'
+import farmImageTwo from '../assets/sourcing_nitty-gritty.jpg'
+import farmImageThree from '../assets/sourcing_morning-glory.jpg'
+import farmImageFour from '../assets/sourcing_fossil-flower-farm.jpg'
+import farmImageFive from '../assets/sourcing_new-spoke-farm.jpg'
+import farmImageSix from '../assets/sourcing_food-for-friends-farm.jpg'
+import farmImageSeven from '../assets/sourcing_overland-honey.png'
 import focacciaImage from '../assets/focaccia.jpg'
 import millOneImage from '../assets/mill-1.jpg'
 import millTwoImage from '../assets/mill-2.jpg'
@@ -111,23 +115,47 @@ import ThemedContainer from '../components/layout/ThemedContainer.astro'
                 <Picture src={farmImageOne} alt="Rusted Rooster Farm, ME" />
               </div>
               <div class="swiper-slide">
-                <Picture src={farmImageTwo} alt="Two Hands Farm, Me" />
+                <Picture src={farmImageTwo} alt="Nitty Gritty Grain Co., VT" />
               </div>
               <div class="swiper-slide">
                 <Picture src={farmImageThree} alt="Morning Glory Farm, ME" />
+              </div>
+              <div class="swiper-slide">
+                <Picture src={farmImageFour} alt="Fossil Flower Farm, ME" />
+              </div>
+              <div class="swiper-slide">
+                <Picture src={farmImageFive} alt="New Spoke Farm, ME" />
+              </div>
+              <div class="swiper-slide">
+                <Picture src={farmImageSix} alt="Food For Friends Farm, ME" />
+              </div>
+              <div class="swiper-slide">
+                <Picture src={farmImageSeven} alt="Overland Honey, ME" />
               </div>
               <div class="swiper-pagination"></div>
             </div>
             <div class="swiper-captions">
               <p class="active">
-                Rusted Rooster Farm, ME. Currently using their Red Fife, Turkey Red, buckwheat
-                flour, and cornmeal.
+                Rusted Rooster (Parkman, ME) MOFGA certified - 90% of our grain comes from Rusted
+                Rooster, as well as our Buckwheat!
               </p>
               <p>
-                Two Hands Farm, ME. Carries our Spelt country loaf, milk buns, baguettes & sourdough
-                chocolate chip cookies.
+                Nitty Gritty Grain Co. (Charlotte, VT) NOFA-VT Certified Organic - we get our soft
+                white winter wheat & Wapsie Valley Corn from this farm.
               </p>
-              <p>Morning Glory Farm, ME. CSA farm that carries our breads and pastries.</p>
+              <p>
+                Morning Glory (Bethel, ME) Organic - eggs, yogurt & whey (that we strain from the
+                yogurt). They also carry our bread alongside their vegetable CSA!
+              </p>
+              <p>
+                Fossil Flower Farm (Stow, ME) MOFGA Certified - eggs, vegetables & edible flowers
+              </p>
+              <p>
+                New Spoke Farm (Oxford County, ME) MOFGA Certified - any & all kinds of vegetables -
+                They also carry our bread for their CSA shares!
+              </p>
+              <p>Food For Friends Farm (Newry, ME) - Organic - any & all vegetables</p>
+              <p>Overland Honey (Portland, ME)</p>
             </div>
           </div>
 
@@ -445,7 +473,6 @@ import ThemedContainer from '../components/layout/ThemedContainer.astro'
 
   .swiper-slide {
     border-radius: var(--border-radius-image);
-    box-shadow: var(--box-shadow-normal);
   }
 
   .swiper-captions {

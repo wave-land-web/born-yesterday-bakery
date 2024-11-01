@@ -146,9 +146,6 @@ body {
   font-family: var(--font-baloo-bhaijaan);
   letter-spacing: 0.75px;
   color: var(--color-black);
-
-  /* Experimental, but fallback is default styling */
-  text-wrap: balance;
 }
 
 html[data-overlay-displayed='true'] {
@@ -191,11 +188,13 @@ h2,
 h3,
 h4,
 h5 {
+  text-wrap: balance;
   margin: 0;
 }
 
 p,
 li {
+  text-wrap: pretty;
   font-size: clamp(var(--size-xs), 5vw, var(--size-sm));
 }
 
