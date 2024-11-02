@@ -1,14 +1,17 @@
 ---
 import anadamaImage from '../assets/anadama.jpg'
 import HeroBanner from '../components/layout/HeroBanner.astro'
-import About from '../components/pages/home/About.astro'
-import Info from '../components/pages/home/Info.astro'
+import SectionHeader from '../components/text/SectionHeader.astro'
+import Button from '../components/ui/Button.astro'
+import CompanyLogos from '../components/ui/CompanyLogos.astro'
+import FlashingImages from '../components/ui/FlashingImages.astro'
 import Layout from '../layouts/Layout.astro'
 ---
 
 <Layout
   title="Born Yesterday Bakery"
   description="Born Yesterday Bakery is a bakery located in Maine, specializing in sourdough bread"
+  socialImage="/images/anadama.jpg"
 >
   <HeroBanner
     title="Born Yesterday Bakery"
@@ -16,7 +19,51 @@ import Layout from '../layouts/Layout.astro'
     description="Where everything is sourdough and sourdough is everything"
   />
   <main>
-    <About />
-    <Info />
+    <!-- About Us -->
+    <section id="about" class="about">
+      <SectionHeader
+        title="About Us"
+        description="Born Yesterday is a small bakery in Western Maine making sourdough baked goods, with a focus on organic, local and whole grains. We see bread as a handmade product that is wildly crafted, using our hands, bodies and minds. A lot of cool 😎 fermentation goes on here and half of it is controlled by those hands and minds, but the other half is just food doing its thing. Hope you like us doing our thing and find something tasty here."
+        class="section-header-custom lsa no-repeat"
+      />
+      <FlashingImages />
+      <Button text="Our Sourcing Story" isLink={true} href="/sourcing" class="button-custom" />
+    </section>
+
+    <!-- Company Info -->
+    <section id="info" class="info lsa no-repeat">
+      <h3>Retailers</h3>
+      <CompanyLogos />
+    </section>
   </main>
 </Layout>
+
+<style>
+  .about {
+    border-bottom: 1px solid var(--color-grey);
+  }
+
+  .section-header-custom {
+    margin: 0 auto 2rem;
+  }
+
+  .button-custom {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 6rem;
+
+    /* TODO: switch to original margin once we had store hours back in  */
+    /* margin: 0 auto 4rem; */
+  }
+
+  .info h3 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .info h3 {
+      font-size: var(--size-lg);
+    }
+  }
+</style>

@@ -1,0 +1,40 @@
+---
+export interface Props {
+  locationSrc: string
+  title?: string
+}
+
+const { locationSrc, title } = Astro.props
+---
+
+<div class="google-map">
+  <iframe
+    src={locationSrc}
+    title={title || 'Google Map Location'}
+    width="800"
+    height="600"
+    style="border: 0;"
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+
+<style>
+  .google-map {
+    position: relative;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    box-shadow: var(--box-shadow-normal);
+  }
+
+  .google-map iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: var(--border-radius-image);
+  }
+</style>

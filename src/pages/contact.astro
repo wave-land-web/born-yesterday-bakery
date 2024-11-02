@@ -3,18 +3,20 @@ import { Icon } from 'astro-icon/components'
 import kouignAmannImage from '../assets/kouign-amann.jpeg'
 import HeroBanner from '../components/layout/HeroBanner.astro'
 import SectionHeader from '../components/text/SectionHeader.astro'
+import Button from '../components/ui/Button.astro'
 import Layout from '../layouts/Layout.astro'
 ---
 
 <Layout
   title="Born Yesterday Bakery | Contact"
   description="Contact Born Yesterday Bakery for information about our bread and pastries, order info, or to say hello. We'd love to hear from you!"
+  socialImage="/images/kouign-amann.jpeg"
 >
   <HeroBanner title="Contact Us" image={kouignAmannImage} />
   <main>
     <section id="contact" class="contact lsa no-repeat">
       <form method="POST" class="form" name="contactForm" action="/success" data-netlify="true">
-        <SectionHeader title="Let's Chat" class="section-header" />
+        <SectionHeader title="Let's Chat" class="section-header-custom" />
         <div class="form-field">
           <input id="name" type="text" name="name" placeholder=" " required />
           <label for="name">Name: <span>*</span></label>
@@ -28,7 +30,7 @@ import Layout from '../layouts/Layout.astro'
           ></textarea>
           <label for="message">Message: <span>*</span></label>
         </div>
-        <button class="site-cta" type="submit">Send Message</button>
+        <Button text="Send Message" isLink={false} type="submit" class="button-custom" />
       </form>
 
       <aside class="contact-info">
@@ -42,20 +44,6 @@ import Layout from '../layouts/Layout.astro'
               rel="noopener noreferrer"
               aria-label="Instagram"
               >Instagram
-              <Icon name="arrow-top-right" />
-            </a>
-          </p>
-        </div>
-        <div>
-          <h3>Visit Us</h3>
-          <p>221 Barker Road Bethel, ME</p>
-          <p>
-            <a
-              href="https://maps.app.goo.gl/Zi8c93ZntshAJUiNA"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Google Maps"
-              >View on Map
               <Icon name="arrow-top-right" />
             </a>
           </p>
@@ -74,20 +62,14 @@ import Layout from '../layouts/Layout.astro'
     }
   }
 
-  .section-header {
-    margin-bottom: 4rem;
-  }
-
-  @media (min-width: 768px) {
-    .section-header {
-      text-align: left;
-    }
-  }
-
   .form {
     display: flex;
     flex-direction: column;
     margin-bottom: 4rem;
+  }
+
+  .section-header-custom {
+    margin: 0 auto 2rem;
   }
 
   .form-field {
@@ -179,15 +161,8 @@ import Layout from '../layouts/Layout.astro'
     color: var(--color-primary);
   }
 
-  .form button {
+  .form .button-custom {
     margin: 0 auto;
-    font-size: var(--size-sm);
-  }
-
-  @media (min-width: 768px) {
-    .form button {
-      font-size: var(--size-base);
-    }
   }
 
   .contact-info {
@@ -199,6 +174,7 @@ import Layout from '../layouts/Layout.astro'
     max-width: 350px;
     margin: 0 auto;
     padding: 1.5rem;
+    border-radius: var(--border-radius-image);
     background-color: var(--color-secondary);
     box-shadow: 1rem 1rem 4rem var(--color-grey-shadow);
   }
@@ -210,7 +186,7 @@ import Layout from '../layouts/Layout.astro'
   }
 
   .contact-info h3,
-  .contact-info p {
+  .contact-info p:not(:last-of-type) {
     margin-bottom: 0.75rem;
     text-align: left;
   }
@@ -223,6 +199,10 @@ import Layout from '../layouts/Layout.astro'
   .contact-info p {
     font-size: var(--size-xs);
     color: var(--color-grey);
+  }
+
+  .contact-info p:last-of-type {
+    margin-bottom: 0;
   }
 
   .contact-info a {

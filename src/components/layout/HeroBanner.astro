@@ -50,6 +50,7 @@ const { src: backgroundImageWebp } = await getImage({
     gap: 1rem;
     background-color: var(--color-secondary);
     color: var(--color-white);
+    text-shadow: 1px 1px 0 var(--color-black);
   }
 
   @media only screen and (max-device-width: 1366px) {
@@ -59,10 +60,11 @@ const { src: backgroundImageWebp } = await getImage({
   }
 
   .banner p {
-    max-width: 500px;
+    max-width: 550px;
     z-index: 1;
     padding: 0 1rem;
-    font-size: clamp(var(--size-sm), 5vw, var(--size-base));
+    font-size: clamp(var(--size-base), 5vw, 2rem);
     text-align: center;
+    line-height: 1.5;
   }
 </style>
