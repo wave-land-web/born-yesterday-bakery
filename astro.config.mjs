@@ -6,6 +6,7 @@ export default defineConfig({
   site: 'https://bornyesterdaybakery.com',
   scopedStyleStrategy: 'class',
   prefetch: { prefetchAll: true },
+  devToolbar: { enabled: false },
   integrations: [
     sitemap({
       filter: (page) => page !== 'https://bornyesterdaybakery.com/success/',

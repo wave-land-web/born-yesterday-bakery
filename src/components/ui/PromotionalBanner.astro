@@ -1,0 +1,159 @@
+---
+import { Icon } from 'astro-icon/components'
+---
+
+<div id="promo-banner" class="banner">
+  <div class="banner-content">
+    <p>
+      Help fund our bakery, get 120% back in credits! <a
+        href="https://numarket.co/fund/born-yesterday-bakery"
+        target="_blank">NuMarket campaign <Icon name="arrow-top-right" /></a
+      >
+    </p>
+    <button id="close-banner" title="Close Promo"><Icon name="close" /></button>
+  </div>
+</div>
+<button id="open-banner" class="banner-toggle site-cta" title="Open Promo"
+  ><Icon name="chevron" />
+</button>
+
+<style>
+  .banner {
+    display: block;
+    z-index: 2;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem 2rem;
+    opacity: 1;
+    background-color: var(--color-yellow-light);
+    transition: var(--transition-normal);
+    border-top: 2px solid var(--color-black);
+    box-shadow: var(--box-shadow-normal);
+
+    @starting-style {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+
+    @media (min-width: 768px) {
+      & {
+        position: relative;
+        border-top: 0;
+        border-bottom: 2px solid var(--color-black);
+
+        @starting-style {
+          transform: translateY(-100%);
+        }
+      }
+    }
+  }
+
+  .banner-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .banner-content p {
+    margin: 0;
+  }
+
+  .banner-content a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition-normal);
+    text-decoration: underline;
+    font-weight: bold;
+
+    &:hover {
+      color: var(--color-primary);
+    }
+
+    svg {
+      transition: none;
+    }
+  }
+
+  .banner-content button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .banner-content button:hover {
+    color: var(--color-primary);
+  }
+
+  .banner-toggle {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 2;
+    color: var(--color-white);
+    background-color: var(--color-primary);
+    border: none;
+    border-radius: var(--border-radius-image);
+    rotate: 180deg;
+    cursor: pointer;
+  }
+
+  @media (min-width: 768px) {
+    .banner-toggle {
+      top: 1rem;
+      bottom: initial;
+      rotate: 0deg;
+    }
+  }
+
+  .hidden {
+    display: none;
+
+    @starting-style {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  svg[data-icon] {
+    width: 1.5rem;
+    height: 1.5rem;
+    flex-shrink: 0;
+  }
+</style>
+
+<script>
+  const banner = document.getElementById('promo-banner') as HTMLElement
+  const closeBtn = document.getElementById('close-banner') as HTMLElement
+  const openBtn = document.getElementById('open-banner') as HTMLElement
+  let bannerIsOpen = sessionStorage.getItem('bannerClosed') === 'true'
+
+  // Open/close banner helpers
+  // Handles session storage and styling
+  function closeBanner() {
+    banner.classList.add('hidden')
+    openBtn.classList.remove('hidden')
+    sessionStorage.setItem('bannerClosed', 'true')
+    bannerIsOpen = true
+  }
+
+  function openBanner() {
+    banner.classList.remove('hidden')
+    openBtn.classList.add('hidden')
+    sessionStorage.removeItem('bannerClosed')
+    bannerIsOpen = false
+  }
+
+  // (Load): Check if the banner should be open or closed
+  if (bannerIsOpen) {
+    closeBanner()
+  } else {
+    openBanner()
+  }
+
+  closeBtn.addEventListener('click', closeBanner)
+  openBtn.addEventListener('click', openBanner)
+</script>
