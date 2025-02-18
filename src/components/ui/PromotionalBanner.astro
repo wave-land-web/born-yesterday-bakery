@@ -10,12 +10,14 @@ import { Icon } from 'astro-icon/components'
         target="_blank">NuMarket campaign <Icon name="arrow-top-right" /></a
       >
     </p>
-    <button id="close-banner" title="Close Promo"><Icon name="close" /></button>
+    <button id="close-banner" aria-label="Close Promo" title="Close Promo"
+      ><Icon name="close" /></button
+    >
   </div>
 </div>
-<button id="open-banner" class="banner-toggle site-cta" title="Open Promo"
-  ><Icon name="chevron" />
-</button>
+<button id="open-banner" class="banner-toggle site-cta" title="Open Promo Details"
+  >Promo Details ✨</button
+>
 
 <style>
   .banner {
@@ -27,7 +29,7 @@ import { Icon } from 'astro-icon/components'
     right: 0;
     padding: 1rem 2rem;
     opacity: 1;
-    background-color: var(--color-yellow-light);
+    background-color: var(--color-secondary);
     transition: var(--transition-normal);
     border-top: 2px solid var(--color-black);
     box-shadow: var(--box-shadow-normal);
@@ -35,19 +37,6 @@ import { Icon } from 'astro-icon/components'
     @starting-style {
       opacity: 0;
       transform: translateY(100%);
-    }
-
-    @media (min-width: 768px) {
-      & {
-        top: 0;
-        bottom: initial;
-        border-top: 0;
-        border-bottom: 2px solid var(--color-black);
-
-        @starting-style {
-          transform: translateY(-100%);
-        }
-      }
     }
   }
 
@@ -73,18 +62,18 @@ import { Icon } from 'astro-icon/components'
       color: var(--color-primary);
     }
 
-    svg {
+    svg[data-icon] {
       transition: none;
     }
   }
 
-  .banner-content button {
+  .banner-content button[aria-label='Close Promo'] {
     background: none;
     border: none;
     cursor: pointer;
   }
 
-  .banner-content button:hover {
+  .banner-content button[aria-label='Close Promo']:hover {
     color: var(--color-primary);
   }
 
@@ -93,20 +82,9 @@ import { Icon } from 'astro-icon/components'
     bottom: 1rem;
     right: 1rem;
     z-index: 2;
-    color: var(--color-white);
-    background-color: var(--color-primary);
     border: none;
-    border-radius: var(--border-radius-image);
-    rotate: 180deg;
+    font-size: clamp(var(--size-xs), 3vw, var(--size-sm));
     cursor: pointer;
-  }
-
-  @media (min-width: 768px) {
-    .banner-toggle {
-      top: 1rem;
-      bottom: initial;
-      rotate: 0deg;
-    }
   }
 
   .hidden {
