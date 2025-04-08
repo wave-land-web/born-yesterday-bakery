@@ -1,16 +1,20 @@
 ---
+import { Icon } from 'astro-icon/components'
+import { Picture } from 'astro:assets'
 import anadamaImage from '../assets/anadama.jpg'
-import HeroBanner from '../components/ui/HeroBanner.astro'
+import comingSoonImage from '../assets/syd-coming-soon.jpg'
+import thankYouImage from '../assets/thank-you.jpg'
 import SectionHeader from '../components/text/SectionHeader.astro'
 import Button from '../components/ui/Button.astro'
-import CompanyLogos from '../components/ui/CompanyLogos.astro'
 import FlashingImages from '../components/ui/FlashingImages.astro'
+import HeroBanner from '../components/ui/HeroBanner.astro'
+import ThemedContainer from '../components/ui/ThemedContainer.astro'
 import Layout from '../layouts/Layout.astro'
 ---
 
 <Layout
   title="Born Yesterday Bakery"
-  description="Born Yesterday is a small bakery in Western Maine making sourdough baked goods, with a focus on organic, local and whole grains. We see bread as a handmade product that is wildly crafted, using our hands, bodies and minds. A lot of cool 😎 fermentation goes on here and half of it is controlled by those hands and minds, but the other half is just food doing its thing. Hope you like us doing our thing and find something tasty here."
+  description="Born Yesterday is a small bakery in Maine making sourdough baked goods, with a focus on organic, local and whole grains. We see bread as a handmade product that is wildly crafted, using our hands, bodies and minds. A lot of cool 😎 fermentation goes on here and half of it is controlled by those hands and minds, but the other half is just food doing its thing. Hope you like us doing our thing and find something tasty here."
   socialImage="/images/anadama.jpg"
 >
   <HeroBanner
@@ -23,47 +27,102 @@ import Layout from '../layouts/Layout.astro'
     <section id="about" class="about">
       <SectionHeader
         title="About Us"
-        description="Born Yesterday is a small bakery in Western Maine making sourdough baked goods, with a focus on organic, local and whole grains. We see bread as a handmade product that is wildly crafted, using our hands, bodies and minds. A lot of cool 😎 fermentation goes on here and half of it is controlled by those hands and minds, but the other half is just food doing its thing. Hope you like us doing our thing and find something tasty here."
+        description="Born Yesterday is a small bakery in Maine making sourdough baked goods, with a focus on organic, local and whole grains. We see bread as a handmade product that is wildly crafted, using our hands, bodies and minds. A lot of cool 😎 fermentation goes on here and half of it is controlled by those hands and minds, but the other half is just food doing its thing. Hope you like us doing our thing and find something tasty here."
         class="section-header-custom lsa no-repeat"
       />
       <FlashingImages />
       <Button text="Our Sourcing Story" isLink={true} href="/sourcing" class="button-custom" />
     </section>
 
-    <!-- Company Info -->
-    <section id="info" class="info lsa no-repeat">
-      <h3>Retailers</h3>
-      <CompanyLogos />
+    <!-- Thank You -->
+    <section id="numarket" class="numarket">
+      <SectionHeader title="NuMarket Campaign" class="section-header-custom lsa no-repeat" />
+      <div class="container lsa no-repeat">
+        <article>
+          <Icon name="number-1" />
+          <h3>Thank You!</h3>
+          <p>
+            Thanks to our amazing community,
+            <a
+              href="https://numarket.co/fund/born-yesterday-bakery"
+              target="_blank"
+              rel="noopener noreferrer">we raised over $17,000 through NuMarket</a
+            >
+            —far beyond our expectations! Your support means the world, and we can't wait to celebrate
+            with you once the new bakery opens.
+          </p>
+        </article>
+        <Picture src={thankYouImage} alt="Thank You" />
+      </div>
+      <ThemedContainer color="blue" class="themed-container-custom lsa no-repeat">
+        <div class="container">
+          <article>
+            <Icon name="number-2" />
+            <h3>Coming Soon</h3>
+            <p>
+              Our first-ever brick-and-mortar bakery is on the way! After growing through farmers
+              markets and pop-ups, we're so excited to bring you a permanent space filled with fresh
+              bakes, good vibes, and the same homemade love you've come to expect.
+            </p>
+          </article>
+          <Picture src={comingSoonImage} alt="Coming Soon" />
+        </div>
+      </ThemedContainer>
+      <Button text="Reach Out for Updates!" isLink={true} href="/contact" class="button-custom" />
     </section>
   </main>
 </Layout>
 
 <style>
-  .about {
-    border-bottom: 1px solid var(--color-grey);
-  }
-
   .section-header-custom {
     margin: 0 auto 2rem;
   }
 
   .button-custom {
     display: block;
-    width: fit-content;
-    margin: 0 auto 6rem;
-
-    /* TODO: switch to original margin once we had store hours back in  */
-    /* margin: 0 auto 4rem; */
+    margin: 0 auto;
   }
 
-  .info h3 {
-    text-align: center;
-    margin-bottom: 2rem;
+  .numarket {
+    max-width: var(--max-width-large);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(4rem, 5vw, 6rem);
+  }
+
+  .container {
+    display: grid;
+    gap: clamp(4rem, 5vw, 6rem);
   }
 
   @media (min-width: 768px) {
-    .info h3 {
-      font-size: var(--size-lg);
+    .container {
+      grid-template-columns: repeat(2, 1fr);
     }
+  }
+
+  .container article {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 1rem;
+  }
+
+  .container h3,
+  .container p {
+    grid-column-start: 2;
+  }
+
+  .container p {
+    color: var(--color-grey);
+  }
+
+  .container [data-icon] {
+    width: clamp(2.5rem, 5vw, 3rem);
+    align-self: center;
+  }
+
+  .container img {
+    box-shadow: var(--box-shadow-normal);
   }
 </style>
