@@ -1,15 +1,11 @@
 ---
-import { Icon } from 'astro-icon/components'
-import { Picture } from 'astro:assets'
 import anadamaImage from '../assets/anadama.jpg'
-import comingSoonImage from '../assets/syd-coming-soon.jpg'
-import thankYouImage from '../assets/thank-you.jpg'
 import SectionHeader from '../components/text/SectionHeader.astro'
 import Button from '../components/ui/Button.astro'
 import FlashingImages from '../components/ui/FlashingImages.astro'
 import HeroBanner from '../components/ui/HeroBanner.astro'
-import ThemedContainer from '../components/ui/ThemedContainer.astro'
 import Layout from '../layouts/Layout.astro'
+import GoogleMap from '../components/ui/GoogleMap.astro'
 ---
 
 <Layout
@@ -34,41 +30,12 @@ import Layout from '../layouts/Layout.astro'
       <Button text="Our Sourcing Story" isLink={true} href="/sourcing" class="button-custom" />
     </section>
 
-    <!-- Thank You -->
-    <section id="numarket" class="numarket">
-      <SectionHeader title="NuMarket Campaign" class="section-header-custom lsa no-repeat" />
-      <div class="container lsa no-repeat">
-        <article>
-          <Icon name="number-1" />
-          <h3>Thank You!</h3>
-          <p>
-            Thanks to our amazing community,
-            <a
-              href="https://numarket.co/fund/born-yesterday-bakery"
-              target="_blank"
-              rel="noopener noreferrer">we raised over $17,000 through NuMarket</a
-            >
-            —far beyond our expectations! Your support means the world, and we can't wait to celebrate
-            with you once the new bakery opens.
-          </p>
-        </article>
-        <Picture src={thankYouImage} alt="Thank You" />
-      </div>
-      <ThemedContainer color="blue" class="themed-container-custom lsa no-repeat">
-        <div class="container">
-          <article>
-            <Icon name="number-2" />
-            <h3>Coming Soon</h3>
-            <p>
-              Our first-ever brick-and-mortar bakery in Lewiston, Maine is on the way! After growing
-              through farmers markets and pop-ups, we're so excited to bring you a permanent space
-              filled with fresh bakes, good vibes, and the same homemade love you've come to expect.
-            </p>
-          </article>
-          <Picture src={comingSoonImage} alt="Coming Soon" />
-        </div>
-      </ThemedContainer>
-      <Button text="Reach Out for Updates!" isLink={true} href="/contact" class="button-custom" />
+    <section id="info" class="info lsa no-repeat">
+      <SectionHeader title="Where to find us" class="section-header-custom lsa no-repeat" />
+      <GoogleMap
+        locationSrc="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2863.572300701436!2d-70.46566882362306!3d44.13344332123784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cb2460b9c5aaaab%3A0xdd64cf734b339aa8!2s11%20Mechanic%20Falls%20Rd%20Suite%203%2C%20Oxford%2C%20ME%2004270!5e0!3m2!1sen!2sus!4v1765728186712!5m2!1sen!2sus"
+        title="Born Yesterday Bakery Location"
+      />
     </section>
   </main>
 </Layout>
@@ -81,48 +48,5 @@ import Layout from '../layouts/Layout.astro'
   .button-custom {
     display: block;
     margin: 0 auto;
-  }
-
-  .numarket {
-    max-width: var(--max-width-large);
-    display: flex;
-    flex-direction: column;
-    gap: clamp(4rem, 5vw, 6rem);
-  }
-
-  .container {
-    display: grid;
-    gap: clamp(4rem, 5vw, 6rem);
-  }
-
-  @media (min-width: 768px) {
-    .container {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  .container article {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: auto 1fr;
-    gap: 1rem;
-  }
-
-  .container h3,
-  .container p {
-    grid-column-start: 2;
-  }
-
-  .container p {
-    color: var(--color-grey);
-  }
-
-  .container [data-icon] {
-    width: clamp(2.5rem, 5vw, 3rem);
-    align-self: center;
-  }
-
-  .container img {
-    box-shadow: var(--box-shadow-normal);
   }
 </style>
