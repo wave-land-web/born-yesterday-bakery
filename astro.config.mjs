@@ -4,6 +4,7 @@ import { defineConfig } from 'astro/config'
 
 export default defineConfig({
   site: 'https://bornyesterdaybakery.com',
+  trailingSlash: 'always',
   scopedStyleStrategy: 'class',
   prefetch: { prefetchAll: true },
   devToolbar: { enabled: false },

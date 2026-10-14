@@ -18,7 +18,7 @@ import GoogleMap from '../components/ui/GoogleMap.astro'
     image={anadamaImage}
     description="Where everything is sourdough and sourdough is everything"
   />
-  <main>
+  <div class="page-content">
     <!-- About Us -->
     <section id="about" class="about">
       <SectionHeader
@@ -27,7 +27,7 @@ import GoogleMap from '../components/ui/GoogleMap.astro'
         class="section-header-custom lsa no-repeat"
       />
       <FlashingImages />
-      <Button text="Our Sourcing Story" isLink={true} href="/sourcing" class="button-custom" />
+      <Button text="Our Sourcing Story" isLink={true} href="/sourcing/" class="button-custom" />
     </section>
 
     <section id="info" class="info lsa no-repeat">
@@ -37,7 +37,7 @@ import GoogleMap from '../components/ui/GoogleMap.astro'
         title="Born Yesterday Bakery Location"
       />
     </section>
-  </main>
+  </div>
 </Layout>
 
 <style>

@@ -13,61 +13,99 @@ import Layout from '../layouts/Layout.astro'
   socialImage="/images/kouign-amann.jpeg"
 >
   <HeroBanner title="Contact Us" image={kouignAmannImage} />
-  <main>
+  <div class="page-content">
     <section id="contact" class="contact lsa no-repeat">
-      <form method="POST" class="form" name="contactForm" action="/success" data-netlify="true">
+      <form
+        method="POST"
+        class="form"
+        name="contactForm"
+        action="/success/"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+      >
+        {/* Spam protection: hidden from people, filled in by bots */}
+        <p hidden>
+          <label>
+            Don't fill this out: <input name="bot-field" tabindex="-1" />
+          </label>
+        </p>
         <SectionHeader title="Let's Chat" class="section-header-custom" />
         <div class="form-field">
-          <input id="name" type="text" name="name" placeholder=" " required />
-          <label for="name">Name: <span>*</span></label>
+          <input id="name" type="text" name="name" autocomplete="name" placeholder=" " required />
+          <label for="name">
+            Name: <span>*</span>
+          </label>
         </div>
         <div class="form-field">
-          <input id="email" type="email" name="email" placeholder=" " required />
-          <label for="email">Email: <span>*</span></label>
+          <input
+            id="email"
+            type="email"
+            name="email"
+            autocomplete="email"
+            placeholder=" "
+            required
+          />
+          <label for="email">
+            Email: <span>*</span>
+          </label>
         </div>
         <div class="form-field">
-          <textarea id="message" name="message" cols="30" rows="5" placeholder=" " required
+          <textarea
+            id="message"
+            name="message"
+            cols="30"
+            rows="5"
+            placeholder=" "
+            required
           ></textarea>
-          <label for="message">Message: <span>*</span></label>
+          <label for="message">
+            Message: <span>*</span>
+          </label>
         </div>
         <Button text="Send Message" isLink={false} type="submit" class="button-custom" />
       </form>
 
-      <aside class="contact-info">
+      <div class="contact-info">
         <div>
           <h3>Get in Touch</h3>
-          <p><a href="mailto:bornyesterdaybakery@gmail.com">bornyesterdaybakery@gmail.com</a></p>
-          <p>
-            <a
-              href="https://www.instagram.com/bornyesterdaybakery/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              >Instagram
-              <Icon name="arrow-top-right" />
-            </a>
-          </p>
+          <address>
+            <p>
+              <a href="mailto:bornyesterdaybakery@gmail.com">bornyesterdaybakery@gmail.com</a>
+            </p>
+            <p>
+              <a
+                href="https://www.instagram.com/bornyesterdaybakery/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Instagram
+                <Icon name="arrow-top-right" aria-hidden="true" />
+              </a>
+            </p>
+          </address>
         </div>
         <div>
           <h3>Visit Us</h3>
-          <p>
-            11 Mechanic Falls Rd
-            <br /> Oxford, ME 04270
-          </p>
-          <p>
-            <a
-              href="https://maps.app.goo.gl/uHYdqo4y3u89Zzb69"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="View Born Yesterday Bakery location on Google Map"
-              >View on Map
-              <Icon name="arrow-top-right" />
-            </a>
-          </p>
+          <address>
+            <p>
+              11 Mechanic Falls Rd
+              <br /> Oxford, ME 04270
+            </p>
+            <p>
+              <a
+                href="https://maps.app.goo.gl/uHYdqo4y3u89Zzb69"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View on Map
+                <Icon name="arrow-top-right" aria-hidden="true" />
+              </a>
+            </p>
+          </address>
         </div>
-      </aside>
+      </div>
     </section>
-  </main>
+  </div>
 </Layout>
 
 <style>
@@ -220,6 +258,10 @@ import Layout from '../layouts/Layout.astro'
 
   .contact-info p:last-of-type {
     margin-bottom: 0;
+  }
+
+  .contact-info address {
+    font-style: normal;
   }
 
   .contact-info a {

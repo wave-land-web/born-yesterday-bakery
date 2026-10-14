@@ -1,34 +1,57 @@
 ---
 import { Icon } from 'astro-icon/components'
+import { ariaCurrent } from '../../../utils/navigation'
+
+const isCurrent = (path: string) => ariaCurrent(Astro.url.pathname, path)
 ---
 
-<button id="hamburger" class="hamburger" aria-expanded="false" aria-label="menu" title="menu">
-  <div class="top"></div>
-  <div class="middle"></div>
-  <div class="bottom"></div>
+<button
+  id="hamburger"
+  class="hamburger"
+  type="button"
+  aria-expanded="false"
+  aria-controls="mobile-nav"
+  aria-label="Menu"
+  title="Menu"
+>
+  <span class="top"></span>
+  <span class="middle"></span>
+  <span class="bottom"></span>
 </button>
 
-<div class="mobile-nav-overlay">
+<div id="mobile-nav" class="mobile-nav-overlay">
   <ul>
-    <li data-path="home"><a href="/">Home</a></li>
-    <li data-path="sourcing"><a href="/sourcing">Sourcing</a></li>
-    <li data-path="order">
-      <a href="https://bornyesterdaybakery.square.site/" aria-label="order">Order</a>
+    <li data-path="home">
+      <a href="/" aria-current={isCurrent('/')}>
+        Home
+      </a>
     </li>
-    <li data-path="contact"><a href="/contact" aria-label="contact">Contact</a></li>
-    <div class="icons">
+    <li data-path="sourcing">
+      <a href="/sourcing/" aria-current={isCurrent('/sourcing')}>
+        Sourcing
+      </a>
+    </li>
+    <li data-path="order">
+      <a href="https://bornyesterdaybakery.square.site/">Order</a>
+    </li>
+    <li data-path="contact">
+      <a href="/contact/" aria-current={isCurrent('/contact')}>
+        Contact
+      </a>
+    </li>
+    <li class="icons">
       <a
         href="https://www.instagram.com/bornyesterdaybakery/"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Instagram"
       >
-        <Icon name="instagram" />
+        <Icon name="instagram" aria-hidden="true" />
       </a>
       <a href="mailto:bornyesterdaybakery@gmail.com" aria-label="Email">
-        <Icon name="email" />
+        <Icon name="email" aria-hidden="true" />
       </a>
-    </div>
+    </li>
   </ul>
 </div>
 
@@ -139,6 +162,10 @@ import { Icon } from 'astro-icon/components'
     margin-bottom: 1rem;
   }
 
+  .mobile-nav-overlay li.icons {
+    margin-bottom: 0;
+  }
+
   .icons {
     display: flex;
     justify-content: center;
@@ -159,42 +186,51 @@ import { Icon } from 'astro-icon/components'
 </style>
 
 <script>
-  const html = document.querySelector('html')
+  const html = document.documentElement
   const hamburger = document.getElementById('hamburger')
-  const navItems = document.querySelectorAll('.mobile-nav-overlay li')
+  const overlay = document.getElementById('mobile-nav')
+  const navLinks = overlay ? [...overlay.querySelectorAll<HTMLElement>('a')] : []
+  const focusable = hamburger ? [hamburger, ...navLinks] : navLinks
+  const desktop = window.matchMedia('(min-width: 768px)')
   let overlayDisplayed = false
 
-  function handleMobileNavigationOnClick() {
-    overlayDisplayed = !overlayDisplayed
-    html?.setAttribute('data-overlay-displayed', `${overlayDisplayed}`)
-    hamburger?.classList.toggle('active')
-    hamburger?.setAttribute('aria-expanded', `${overlayDisplayed}`)
-  }
+  // Accessibility: Escape closes the menu, and Tab stays inside it while it's open
+  function onKeydown(event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      setOverlay(false)
+      hamburger?.focus()
+      return
+    }
+    if (event.key !== 'Tab') return
 
-  function handleMobileNavigationOnResize() {
-    if (window.innerWidth >= 768) {
-      overlayDisplayed = false
-      html?.setAttribute('data-overlay-displayed', `${overlayDisplayed}`)
-      hamburger?.classList.remove('active')
-      hamburger?.setAttribute('aria-expanded', `${overlayDisplayed}`)
+    const first = focusable[0]
+    const last = focusable[focusable.length - 1]
+    const index = focusable.indexOf(document.activeElement as HTMLElement)
+
+    if (event.shiftKey ? index <= 0 : index === -1 || index === focusable.length - 1) {
+      event.preventDefault()
+      ;(event.shiftKey ? last : first).focus()
     }
   }
 
-  function closeMobileNavOverlay() {
-    overlayDisplayed = false
-    html?.setAttribute('data-overlay-displayed', `${overlayDisplayed}`)
-    hamburger?.classList.remove('active')
+  function setOverlay(displayed: boolean) {
+    overlayDisplayed = displayed
+    html.setAttribute('data-overlay-displayed', `${overlayDisplayed}`)
+    hamburger?.classList.toggle('active', overlayDisplayed)
     hamburger?.setAttribute('aria-expanded', `${overlayDisplayed}`)
+    if (displayed) html.addEventListener('keydown', onKeydown)
+    else html.removeEventListener('keydown', onKeydown)
   }
 
-  // Accessibility
-  html?.addEventListener('keyup', (event) => {
-    if (event.code === 'Escape' && overlayDisplayed) {
-      handleMobileNavigationOnClick()
+  hamburger?.addEventListener('click', () => setOverlay(!overlayDisplayed))
+  navLinks.forEach((link) => link.addEventListener('click', () => setOverlay(false)))
+
+  // Close the menu at the desktop breakpoint; the hamburger is hidden there, so focus the content
+  desktop.addEventListener('change', () => {
+    if (!desktop.matches || !overlayDisplayed) return
+    if (overlay?.contains(document.activeElement)) {
+      document.getElementById('main')?.focus({ preventScroll: true })
     }
+    setOverlay(false)
   })
-
-  hamburger?.addEventListener('click', handleMobileNavigationOnClick)
-  window.addEventListener('resize', handleMobileNavigationOnResize)
-  navItems.forEach((item) => item.addEventListener('click', closeMobileNavOverlay))
 </script>

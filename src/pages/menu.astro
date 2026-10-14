@@ -115,63 +115,55 @@ const menuItems = {
     image={seasonalGalettesImage}
     description="Our menu varies frequently. Check back often to see what we're baking!"
   />
-  <main>
+  <div class="page-content">
     <section id="menu" class="menu">
-      <div class="menu-category lsa no-repeat">
+      <section class="menu-category lsa no-repeat">
         <SectionHeader title="Bread" class="section-header" />
         <ul>
-          {
-            menuItems.bread.map((item) => (
-              <li>
-                {item.name}
-                <span>{item.price}</span>
-              </li>
-            ))
-          }
+          {menuItems.bread.map((item) => (
+            <li>
+              {item.name}
+              <span>{item.price}</span>
+            </li>
+          ))}
         </ul>
-      </div>
-      <div class="menu-category lsa no-repeat">
+      </section>
+      <section class="menu-category lsa no-repeat">
         <SectionHeader title="Pastries" class="section-header" />
         <ul>
-          {
-            menuItems.pastries.map((item) => (
-              <li>
-                {item.name}
-                <span>{item.price}</span>
-              </li>
-            ))
-          }
+          {menuItems.pastries.map((item) => (
+            <li>
+              {item.name}
+              <span>{item.price}</span>
+            </li>
+          ))}
         </ul>
-      </div>
-      <div class="menu-category lsa no-repeat">
+      </section>
+      <section class="menu-category lsa no-repeat">
         <SectionHeader title="CSA (Morning Glory Farm + New Spoke Farm)" class="section-header" />
         <ul>
-          {
-            menuItems.csa.map((item) => (
-              <li>
-                {item.name}
-                <span>{item.price}</span>
-              </li>
-            ))
-          }
+          {menuItems.csa.map((item) => (
+            <li>
+              {item.name}
+              <span>{item.price}</span>
+            </li>
+          ))}
         </ul>
-      </div>
-      <div class="menu-category lsa no-repeat">
+      </section>
+      <section class="menu-category lsa no-repeat">
         <SectionHeader title="Weekly Subscription" class="section-header" />
         <ul>
-          {
-            menuItems.subscription.map((item) => (
-              <li>
-                {item.name}
-                <span>{item.price}</span>
-              </li>
-            ))
-          }
+          {menuItems.subscription.map((item) => (
+            <li>
+              {item.name}
+              <span>{item.price}</span>
+            </li>
+          ))}
         </ul>
-      </div>
+      </section>
       <Button text="Order Now" isLink={true} href="https://bornyesterdaybakery.square.site/" />
     </section>
-  </main>
+  </div>
 </Layout>
 
 <style>
@@ -192,6 +184,7 @@ const menuItems = {
   }
 
   .menu-category {
+    margin: 0 auto;
     width: 100%;
     max-width: 600px;
   }

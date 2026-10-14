@@ -20,14 +20,15 @@ const currentPath = Astro.url.pathname
 <html lang="en" data-overlay-displayed="false" data-current-url={currentPath}>
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    {/* Lets CSS hide scroll-animated content only when JS can reveal it */}
+    <script is:inline>
+      document.documentElement.classList.add('js')
+    </script>
     <!-- SEO -->
     <title>{title}</title>
-    <meta name="title" content={title} />
     <meta name="description" content={description} />
-    <meta name="keywords" content="bakery, sourdough bread, born yesterday bakery, pickup" />
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={canonicalURL} />
 
@@ -47,24 +48,17 @@ const currentPath = Astro.url.pathname
     <meta name="twitter:image" content={socialImageURL} />
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Preload Fonts -->
+    {/* Preload above-the-fold fonts (the outline font is only used below the fold) */}
     <link
       rel="preload"
-      href="/fonts/bobby-jones-regular.woff2"
+      href="/fonts/baloo-bhaijaan-2-latin.woff2"
       as="font"
       type="font/woff2"
       crossorigin
     />
     <link
       rel="preload"
-      href="/fonts/bobby-jones-outline.woff2"
+      href="/fonts/bobby-jones-regular.woff2"
       as="font"
       type="font/woff2"
       crossorigin
@@ -83,57 +77,36 @@ const currentPath = Astro.url.pathname
   <body>
     <Splash />
     <header>
+      <a class="skip-link" href="#main">
+        Skip to content
+      </a>
       <Navigation />
     </header>
-    <slot />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
     <Footer />
+
+    {/* Fade in elements with the class `lsa` the first time they come into view */}
+    <script is:inline>
+      ;(() => {
+        const sections = document.querySelectorAll('.lsa')
+        const reveal = (section) => section.classList.add('active')
+        if (!window.IntersectionObserver) return sections.forEach(reveal)
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return
+              reveal(entry.target)
+              observer.unobserve(entry.target)
+            })
+          },
+          { threshold: 0.1 },
+        )
+
+        sections.forEach((section) => observer.observe(section))
+      })()
+    </script>
   </body>
 </html>
-
-<script is:inline data-astro-rerun>
-  /**
-   * Animate sections with the class `lsa` when they come into view
-   */
-  function handleAnimations() {
-    if (!window.IntersectionObserver) {
-      return console.log('IntersectionObserver not supported')
-    }
-
-    // Grab all sections to be animated
-    const sections = document.querySelectorAll('.lsa')
-
-    // Configure observer options
-    if (sections.length !== 0) {
-      const options = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1,
-      }
-
-      // Initialize observer
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          const section = entry.target
-
-          // By default, animations repeat on scroll unless the section has the class `no-repeat`
-          if (entry.isIntersecting) {
-            section.classList.add('active')
-          } else if (!entry.isIntersecting && !section.classList.contains('no-repeat')) {
-            section.classList.remove('active')
-          }
-        })
-      }, options)
-
-      // Observe each section with the class `lsa`
-      sections.forEach((section) => observer.observe(section))
-    }
-  }
-
-  // Handle animations on page load
-  document.addEventListener('DOMContentLoaded', () => {
-    handleAnimations()
-
-    // Handle animations on scroll
-    document.addEventListener('scroll', handleAnimations)
-  })
-</script>

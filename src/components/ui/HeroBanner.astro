@@ -1,4 +1,5 @@
 ---
+import type { ImageMetadata } from 'astro'
 import { getImage } from 'astro:assets'
 import PageHeader from '../text/PageHeader.astro'
 
@@ -16,15 +17,14 @@ const { src: backgroundImageWebp } = await getImage({
   src: image,
   format: 'webp',
   quality: 75,
-  loading: 'eager',
 })
 ---
 
-<div class="banner lsa no-repeat" style={`background-image: url(${backgroundImageWebp});`}>
+<header class="banner" style={`background-image: url(${backgroundImageWebp});`}>
   <div class="scrim"></div>
   <PageHeader title={title} />
   {description && <p>{description}</p>}
-</div>
+</header>
 
 <style>
   .scrim {

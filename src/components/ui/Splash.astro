@@ -9,24 +9,26 @@ const { src: sproutedRyeImageWebp } = await getImage({
   src: sproutedRye,
   format: 'webp',
   quality: 75,
-  loading: 'eager',
 })
 ---
 
-<div
+{/* The background loads only when the splash is shown (see script) */}
+<dialog
   class="splash"
-  style={`background-image: url(${sproutedRyeImageWebp});
-`}
+  aria-label="Welcome to Born Yesterday Bakery"
+  data-background={sproutedRyeImageWebp}
 >
   <div class="scrim"></div>
   <div class="splash-content">
-    <Icon name="logo" />
+    <Icon name="logo" role="img" aria-label="Born Yesterday Bakery" />
     <p>Sourdough baked goods made with local, organic & ancient grains in Maine</p>
-    <div class="splace-ctas">
-      <button class="site-cta">Enter Site</button>
-      <a href="https://bornyesterdaybakery.square.site/" class="site-cta" aria-label="Order Now"
-        >Order Now</a
-      >
+    <div class="splash-ctas">
+      <button type="button" class="site-cta" autofocus>
+        Enter Site
+      </button>
+      <a href="https://bornyesterdaybakery.square.site/" class="site-cta">
+        Order Now
+      </a>
     </div>
     <div class="splash-icons">
       <a
@@ -35,35 +37,56 @@ const { src: sproutedRyeImageWebp } = await getImage({
         rel="noopener noreferrer"
         aria-label="Instagram"
       >
-        <Icon name="instagram" />
+        <Icon name="instagram" aria-hidden="true" />
       </a>
       <a href="mailto:bornyesterdaybakery@gmail.com" aria-label="Email">
-        <Icon name="email" />
+        <Icon name="email" aria-hidden="true" />
       </a>
     </div>
   </div>
-</div>
+</dialog>
+
+{/* Start the background download while the page is still loading, but only if the splash will show */}
+<script is:inline>
+  if (sessionStorage.getItem('user-closed-splash') !== 'true') {
+    new Image().src = document.querySelector('.splash').dataset.background
+  }
+</script>
 
 <style>
+  /* Native <dialog> (modal via showModal()): fills the screen and fades in and out */
   .splash {
-    visibility: hidden;
-    z-index: -1;
-    position: fixed;
     height: 100vh;
     width: 100vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    max-height: none;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    color: inherit;
+    background-color: transparent;
     background-size: cover;
     background-position: center;
     opacity: 0;
-    transition: all var(--transition-long);
+    transition:
+      opacity var(--transition-long),
+      display var(--transition-long) allow-discrete,
+      overlay var(--transition-long) allow-discrete;
   }
 
-  .splash.active {
+  .splash[open] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     opacity: 1;
-    visibility: visible;
-    z-index: 100;
+
+    @starting-style {
+      opacity: 0;
+    }
+  }
+
+  .splash::backdrop {
+    background-color: transparent;
   }
 
   .splash .scrim {
@@ -94,7 +117,7 @@ const { src: sproutedRyeImageWebp } = await getImage({
     color: var(--color-black);
   }
 
-  .splace-ctas {
+  .splash-ctas {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -102,23 +125,23 @@ const { src: sproutedRyeImageWebp } = await getImage({
     margin-bottom: 2rem;
   }
 
-  .splace-ctas .site-cta {
+  .splash-ctas .site-cta {
     font-size: clamp(var(--size-xs), 5vw, var(--size-base));
     color: var(--color-secondary);
     border: 2px solid var(--color-primary);
   }
 
-  .splace-ctas button.site-cta:hover {
+  .splash-ctas button.site-cta:hover {
     color: var(--color-primary);
     background-color: transparent;
   }
 
-  .splace-ctas a.site-cta {
+  .splash-ctas a.site-cta {
     color: var(--color-primary);
     background-color: transparent;
   }
 
-  .splace-ctas a.site-cta:hover {
+  .splash-ctas a.site-cta:hover {
     color: var(--color-secondary);
     background-color: var(--color-primary);
   }
@@ -148,32 +171,33 @@ const { src: sproutedRyeImageWebp } = await getImage({
    * Handle show/hide of the splash screen
    */
   function handleSplashDisplay() {
-    const body = document.querySelector('body')
-    const splash = document.querySelector('.splash')
-    const buttons = document.querySelectorAll('.splash .site-cta')
-    const userClosedSplash = sessionStorage.getItem('user-closed-splash') === 'true'
+    // Show splash only if the user hasn't closed it during this session
+    if (sessionStorage.getItem('user-closed-splash') === 'true') return
 
-    // Close
-    const closeSplash = () => {
-      splash?.classList.remove('active')
-      body!.dataset.overlayDisplayed = 'false'
-      sessionStorage.setItem('user-closed-splash', 'true')
-    }
+    const splash = document.querySelector<HTMLDialogElement>('.splash')
+    if (!splash) return
 
-    // Show
-    const showSplash = () => {
-      splash?.classList.add('active')
-      body!.dataset.overlayDisplayed = 'true'
-      sessionStorage.setItem('user-closed-splash', 'false')
+    // The modal dialog makes the page behind inert, focuses the first button and closes on Escape.
+    // Show it once the background has loaded, so it doesn't fade in as a see-through scrim
+    const background = new Image()
+    const show = () => {
+      splash.style.backgroundImage = `url(${background.src})`
+      splash.showModal()
     }
-
-    // Show splash if the user hasn't closed it during this session
-    if (!userClosedSplash) {
-      showSplash()
-    }
+    background.addEventListener('load', show, { once: true })
+    background.addEventListener('error', show, { once: true })
+    background.src = splash.dataset.background ?? ''
 
     // (On Click) - Close the splash screen
-    buttons.forEach((button) => button.addEventListener('click', closeSplash))
+    splash.querySelectorAll('.site-cta').forEach((cta) => {
+      cta.addEventListener('click', () => splash.close())
+    })
+
+    // (On Close, including Escape) - Remember the choice and move focus into the page
+    splash.addEventListener('close', () => {
+      sessionStorage.setItem('user-closed-splash', 'true')
+      document.getElementById('main')?.focus({ preventScroll: true })
+    })
   }
 
   // (On Load) - Show the splash screen
