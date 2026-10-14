@@ -56,6 +56,8 @@ const { src: sproutedRyeImageWebp } = await getImage({
 <style>
   /* Native <dialog> (modal via showModal()): fills the screen and fades in and out */
   .splash {
+    align-items: center;
+    justify-content: center;
     height: 100vh;
     width: 100vw;
     max-height: none;
@@ -76,8 +78,6 @@ const { src: sproutedRyeImageWebp } = await getImage({
 
   .splash[open] {
     display: flex;
-    align-items: center;
-    justify-content: center;
     opacity: 1;
 
     @starting-style {
