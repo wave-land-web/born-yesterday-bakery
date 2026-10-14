@@ -11,21 +11,19 @@ export interface Props {
 const { color, isSection, sectionId, class: className } = Astro.props
 ---
 
-{
-  isSection ? (
-    <section id={sectionId} class={`${className} themed-container`} data-color={color}>
-      <Icon name="triangles" />
-      <slot />
-      <Icon name="triangles" />
-    </section>
-  ) : (
-    <div class={`${className} themed-container`} data-color={color}>
-      <Icon name="triangles" />
-      <slot />
-      <Icon name="triangles" />
-    </div>
-  )
-}
+{isSection ? (
+  <section id={sectionId} class={`${className} themed-container`} data-color={color}>
+    <Icon name="triangles" aria-hidden="true" />
+    <slot />
+    <Icon name="triangles" aria-hidden="true" />
+  </section>
+) : (
+  <div class={`${className} themed-container`} data-color={color}>
+    <Icon name="triangles" aria-hidden="true" />
+    <slot />
+    <Icon name="triangles" aria-hidden="true" />
+  </div>
+)}
 
 <style>
   .themed-container {

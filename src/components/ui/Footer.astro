@@ -5,27 +5,32 @@ import { Icon } from 'astro-icon/components'
 <footer id="footer" class="footer">
   <div class="footer-info">
     <p>
-      &copy; {new Date().getFullYear()} Born Yesterday Bakery
+      &copy; <span id="footer-year">{new Date().getFullYear()}</span> Born Yesterday Bakery
+      {/* Keep the year current between deploys; the build-time year is the fallback */}
+      <script is:inline>
+        document.getElementById('footer-year').textContent = new Date().getFullYear()
+      </script>
     </p>
     <p>
-      Website by <a href="http://wavelandweb.com" target="_blank" rel="noopener noreferrer"
-        >Wave Land Web <Icon name="arrow-top-right" /></a
-      >
+      Website by{' '}
+      <a href="https://wavelandweb.com" target="_blank" rel="noopener noreferrer">
+        Wave Land Web <Icon name="arrow-top-right" aria-hidden="true" />
+      </a>
     </p>
   </div>
-  <div class="footer-icons">
+  <address class="footer-icons">
     <a
       href="https://www.instagram.com/bornyesterdaybakery/"
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Instagram"
     >
-      <Icon name="instagram" />
+      <Icon name="instagram" aria-hidden="true" />
     </a>
     <a href="mailto:bornyesterdaybakery@gmail.com" aria-label="Email">
-      <Icon name="email" />
+      <Icon name="email" aria-hidden="true" />
     </a>
-  </div>
+  </address>
 </footer>
 
 <style>
@@ -77,6 +82,7 @@ import { Icon } from 'astro-icon/components'
 
   .footer-icons {
     display: flex;
+    font-style: normal;
     justify-content: center;
     gap: 1.5rem;
   }

@@ -8,10 +8,10 @@ export interface Props {
 const { title, description, class: className } = Astro.props
 ---
 
-<div class={`${className} header`}>
+<header class={`${className} header`}>
   <h2>{title}</h2>
   {description && <p>{description}</p>}
-</div>
+</header>
 
 <style>
   .header {

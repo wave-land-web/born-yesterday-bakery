@@ -1,17 +1,34 @@
 ---
 import DesktopLogo from '../logo/Desktop.astro'
+import { ariaCurrent } from '../../../utils/navigation'
+
+const isCurrent = (path: string) => ariaCurrent(Astro.url.pathname, path)
 ---
 
 <ul class="desktop-nav">
-  <li data-path="home"><a href="/">Home</a></li>
-  <li data-path="sourcing"><a href="/sourcing">Sourcing</a></li>
+  <li data-path="home">
+    <a href="/" aria-current={isCurrent('/')}>
+      Home
+    </a>
+  </li>
+  <li data-path="sourcing">
+    <a href="/sourcing/" aria-current={isCurrent('/sourcing')}>
+      Sourcing
+    </a>
+  </li>
 
   <li class="logo">
     <DesktopLogo />
   </li>
 
-  <li data-path="order"><a href="https://bornyesterdaybakery.square.site/">Order</a></li>
-  <li data-path="contact"><a href="/contact">Contact</a></li>
+  <li data-path="order">
+    <a href="https://bornyesterdaybakery.square.site/">Order</a>
+  </li>
+  <li data-path="contact">
+    <a href="/contact/" aria-current={isCurrent('/contact')}>
+      Contact
+    </a>
+  </li>
 </ul>
 
 <style>

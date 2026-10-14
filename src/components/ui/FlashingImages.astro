@@ -7,62 +7,27 @@ import rawDoughOne from '../../assets/raw-dough-1.jpg'
 import rawDoughTwo from '../../assets/raw-dough-2.jpg'
 import sydOne from '../../assets/syd-1.jpg'
 import sydTwo from '../../assets/syd-2.jpg'
+
+// Images fill the column: full width on phones, a third of the 1024px container on desktop
+const pictureProps = {
+  formats: ['avif', 'webp'],
+  widths: [400, 800, 1200],
+  sizes: '(min-width: 1024px) 310px, (min-width: 768px) 30vw, calc(100vw - 4rem)',
+}
 ---
 
 <div class="flashing-images lsa no-repeat">
   <div class="image-container">
-    <Picture
-      class="image-one"
-      src={sydMakingDoughOne}
-      formats={['avif', 'webp']}
-      widths={[250, 500, 750, sydMakingDoughOne.width]}
-      sizes={'(min-width: 768px) 100vw, 50vw'}
-      alt="Syd making dough"
-    />
-    <Picture
-      class="image-two"
-      src={sydMakingDoughTwo}
-      formats={['avif', 'webp']}
-      widths={[250, 500, 750, sydMakingDoughTwo.width]}
-      sizes={'(min-width: 768px) 100vw, 50vw'}
-      alt="Syd making dough"
-    />
+    <Picture class="image-one" src={sydMakingDoughOne} {...pictureProps} alt="Syd making dough" />
+    <Picture class="image-two" src={sydMakingDoughTwo} {...pictureProps} alt="Syd making dough" />
   </div>
   <div class="image-container">
-    <Picture
-      class="image-one"
-      src={sydOne}
-      formats={['avif', 'webp']}
-      widths={[250, 500, 750, sydOne.width]}
-      sizes={'(min-width: 768px) 100vw, 50vw'}
-      alt="Syd baking"
-    />
-    <Picture
-      class="image-two"
-      src={sydTwo}
-      formats={['avif', 'webp']}
-      widths={[250, 500, 750, sydTwo.width]}
-      sizes={'(min-width: 768px) 100vw, 50vw'}
-      alt="Syd baking and smiling"
-    />
+    <Picture class="image-one" src={sydOne} {...pictureProps} alt="Syd baking" />
+    <Picture class="image-two" src={sydTwo} {...pictureProps} alt="Syd baking and smiling" />
   </div>
   <div class="image-container">
-    <Picture
-      class="image-one"
-      src={rawDoughOne}
-      formats={['avif', 'webp']}
-      widths={[250, 500, 750, rawDoughOne.width]}
-      sizes={'(min-width: 768px) 100vw, 50vw'}
-      alt="Raw dough on a rack"
-    />
-    <Picture
-      class="image-two"
-      src={rawDoughTwo}
-      formats={['avif', 'webp']}
-      widths={[250, 500, 750, rawDoughTwo.width]}
-      sizes={'(min-width: 768px) 100vw, 50vw'}
-      alt="Raw dough on a rack"
-    />
+    <Picture class="image-one" src={rawDoughOne} {...pictureProps} alt="Raw dough on a rack" />
+    <Picture class="image-two" src={rawDoughTwo} {...pictureProps} alt="Raw dough on a rack" />
   </div>
 </div>
 
@@ -118,40 +83,26 @@ import sydTwo from '../../assets/syd-2.jpg'
 
 <script>
   const images = document.querySelectorAll('.image-container')
+  const phone = window.matchMedia('(max-width: 767px)')
 
-  function handleActiveImagesOnScroll() {
-    if (!window.IntersectionObserver) {
-      return console.log('IntersectionObserver not supported')
+  /**
+   * On phones, swap to the second image while each pair is in the middle of the screen
+   */
+  if (window.IntersectionObserver) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => entry.target.classList.toggle('active', entry.isIntersecting))
+      },
+      { rootMargin: '-25%', threshold: 0.1 },
+    )
+
+    // Only watch on phones; reset the images when switching to the desktop layout
+    const watch = () => {
+      if (phone.matches) return images.forEach((image) => observer.observe(image))
+      observer.disconnect()
+      images.forEach((image) => image.classList.remove('active'))
     }
-
-    const options = {
-      root: null,
-      rootMargin: '-25%',
-      threshold: 0.1,
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-      if (window.innerWidth < 768) {
-        entries.forEach((entry) => {
-          const image = entry.target
-
-          if (entry.isIntersecting) {
-            image.classList.add('active')
-          } else {
-            image.classList.remove('active')
-          }
-        })
-      }
-    }, options)
-
-    images.forEach((section) => observer.observe(section))
+    watch()
+    phone.addEventListener('change', watch)
   }
-
-  // Reset active sections on resize
-  window.addEventListener('resize', () => {
-    images.forEach((image) => image.classList.remove('active'))
-  })
-
-  // Set active sections on scroll
-  document.addEventListener('scroll', handleActiveImagesOnScroll)
 </script>

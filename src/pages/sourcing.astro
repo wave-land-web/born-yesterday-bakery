@@ -12,12 +12,23 @@ import farmImageSeven from '../assets/sourcing_overland-honey.png'
 import focacciaImage from '../assets/focaccia.jpg'
 import millOneImage from '../assets/mill-1.jpg'
 import millTwoImage from '../assets/mill-2.jpg'
-import alientGif from '../assets/alien.gif'
+import alienGif from '../assets/alien.gif'
 import trumanShowGif from '../assets/truman-show.gif'
 import HeroBanner from '../components/ui/HeroBanner.astro'
 import SectionHeader from '../components/text/SectionHeader.astro'
 import Layout from '../layouts/Layout.astro'
 import ThemedContainer from '../components/ui/ThemedContainer.astro'
+
+// Responsive image settings: column images are at most ~480px wide, GIFs at most 300px
+const columnImage = {
+  widths: [480, 960],
+  sizes: '(min-width: 1024px) 480px, (min-width: 768px) 45vw, 100vw',
+}
+const cardImage = {
+  widths: [480, 960],
+  sizes: '(min-width: 1024px) 430px, (min-width: 768px) 40vw, 80vw',
+}
+const gifImage = { widths: [300, 600], sizes: '300px' }
 ---
 
 <Layout
@@ -42,7 +53,7 @@ import ThemedContainer from '../components/ui/ThemedContainer.astro'
     </div>
   </div>
 
-  <main>
+  <div class="page-content">
     <!-- Introduction -->
     <section id="introduction" class="introduction">
       <div class="column">
@@ -52,7 +63,7 @@ import ThemedContainer from '../components/ui/ThemedContainer.astro'
           class="section-header-custom lsa no-repeat"
         />
         <div class="image-container lsa no-repeat">
-          <Picture src={anadamaTwoImage} alt="Anadama bread" loading="eager" />
+          <Picture src={anadamaTwoImage} alt="Anadama bread" loading="eager" {...columnImage} />
         </div>
       </div>
 
@@ -61,15 +72,17 @@ import ThemedContainer from '../components/ui/ThemedContainer.astro'
           <h3>Organic Practices</h3>
           <ul>
             <li>
-              <Icon name="check" />Maintaining and improving soil fertility, structure, and
-              biodiversity.
+              <Icon name="check" aria-hidden="true" />
+              Maintaining and improving soil fertility, structure, and biodiversity.
             </li>
             <li>
-              <Icon name="check" />Reducing erosion and minimizing human, animal, and environmental
-              exposure to toxic materials.
+              <Icon name="check" aria-hidden="true" />
+              Reducing erosion and minimizing human, animal, and environmental exposure to toxic
+              materials.
             </li>
             <li>
-              <Icon name="check" />Investing in organic growers to ensure a sustainable future.
+              <Icon name="check" aria-hidden="true" />
+              Investing in organic growers to ensure a sustainable future.
             </li>
           </ul>
         </div>
@@ -78,16 +91,17 @@ import ThemedContainer from '../components/ui/ThemedContainer.astro'
           <h3>Local Support</h3>
           <ul>
             <li>
-              <Icon name="check" />Buying local food means more money goes directly to those who
-              grew it.
+              <Icon name="check" aria-hidden="true" />
+              Buying local food means more money goes directly to those who grew it.
             </li>
             <li>
-              <Icon name="check" />This strengthens our community's economy instead of enriching
-              distant corporations.
+              <Icon name="check" aria-hidden="true" />
+              This strengthens our community's economy instead of enriching distant corporations.
             </li>
             <li>
-              <Icon name="check" />Using locally-sourced ingredients ensures our products are fresh
-              and of the highest quality.
+              <Icon name="check" aria-hidden="true" />
+              Using locally-sourced ingredients ensures our products are fresh and of the highest
+              quality.
             </li>
           </ul>
         </div>
@@ -109,32 +123,32 @@ import ThemedContainer from '../components/ui/ThemedContainer.astro'
         />
         <div class="column">
           <!-- Swiper -->
-          <div class="swiper">
+          <figure class="swiper">
             <div class="swiper-wrapper">
               <div class="swiper-slide">
-                <Picture src={farmImageOne} alt="Rusted Rooster Farm, ME" />
+                <Picture src={farmImageOne} alt="Rusted Rooster Farm, ME" {...cardImage} />
               </div>
               <div class="swiper-slide">
-                <Picture src={farmImageTwo} alt="Nitty Gritty Grain Co., VT" />
+                <Picture src={farmImageTwo} alt="Nitty Gritty Grain Co., VT" {...cardImage} />
               </div>
               <div class="swiper-slide">
-                <Picture src={farmImageThree} alt="Morning Glory Farm, ME" />
+                <Picture src={farmImageThree} alt="Morning Glory Farm, ME" {...cardImage} />
               </div>
               <div class="swiper-slide">
-                <Picture src={farmImageFour} alt="Fossil Flower Farm, ME" />
+                <Picture src={farmImageFour} alt="Fossil Flower Farm, ME" {...cardImage} />
               </div>
               <div class="swiper-slide">
-                <Picture src={farmImageFive} alt="New Spoke Farm, ME" />
+                <Picture src={farmImageFive} alt="New Spoke Farm, ME" {...cardImage} />
               </div>
               <div class="swiper-slide">
-                <Picture src={farmImageSix} alt="Food For Friends Farm, ME" />
+                <Picture src={farmImageSix} alt="Food For Friends Farm, ME" {...cardImage} />
               </div>
               <div class="swiper-slide">
-                <Picture src={farmImageSeven} alt="Overland Honey, ME" />
+                <Picture src={farmImageSeven} alt="Overland Honey, ME" {...cardImage} />
               </div>
               <div class="swiper-pagination"></div>
             </div>
-            <div class="swiper-captions">
+            <figcaption class="swiper-captions" aria-live="polite">
               <p class="active">
                 Rusted Rooster (Parkman, ME) MOFGA certified - 90% of our grain comes from Rusted
                 Rooster, as well as our Buckwheat!
@@ -156,26 +170,26 @@ import ThemedContainer from '../components/ui/ThemedContainer.astro'
               </p>
               <p>Food For Friends Farm (Newry, ME) - Organic - any & all vegetables</p>
               <p>Overland Honey (Portland, ME)</p>
-            </div>
-          </div>
+            </figcaption>
+          </figure>
 
-          <div class="farms-info">
-            <article>
-              <Icon name="baguette" />
+          <ul class="farms-info">
+            <li>
+              <Icon name="baguette" aria-hidden="true" />
               <h3>Quality</h3>
               <p>Our commitment to sourcing only the finest organic ingredients.</p>
-            </article>
-            <article>
-              <Icon name="recycle" />
+            </li>
+            <li>
+              <Icon name="recycle" aria-hidden="true" />
               <h3>Sustainability</h3>
               <p>Ensuring that our farming partners use environmentally-friendly practices.</p>
-            </article>
-            <article>
-              <Icon name="gps" />
+            </li>
+            <li>
+              <Icon name="gps" aria-hidden="true" />
               <h3>Traceability</h3>
               <p>We know exactly where our ingredients come from and how they are produced.</p>
-            </article>
-          </div>
+            </li>
+          </ul>
         </div>
       </div>
     </ThemedContainer>
@@ -190,7 +204,7 @@ import ThemedContainer from '../components/ui/ThemedContainer.astro'
         />
         <div class="column lsa no-repeat">
           <article>
-            <Icon name="number-1" />
+            <Icon name="number-1" aria-hidden="true" />
             <h3>Stone Milling</h3>
             <p>
               Our traditional stone mill preserves all parts of the grain, resulting in whole grain
@@ -198,7 +212,7 @@ import ThemedContainer from '../components/ui/ThemedContainer.astro'
               freshest flour possible, directly from our mill to your table.
             </p>
           </article>
-          <Picture src={millOneImage} alt="Stone mill" />
+          <Picture src={millOneImage} alt="Stone mill" {...columnImage} />
         </div>
       </div>
 
@@ -206,7 +220,7 @@ import ThemedContainer from '../components/ui/ThemedContainer.astro'
         <div class="container">
           <div class="column">
             <article>
-              <Icon name="number-2" />
+              <Icon name="number-2" aria-hidden="true" />
               <h3>whole grain Flour</h3>
               <p>
                 Whole grain flour includes the bran and germ, which are often removed in commercial
@@ -214,7 +228,7 @@ import ThemedContainer from '../components/ui/ThemedContainer.astro'
                 grain, making our baked goods totally awesome and delicious.
               </p>
             </article>
-            <Picture src={millTwoImage} alt="Stone mill" />
+            <Picture src={millTwoImage} alt="Stone mill" {...columnImage} />
           </div>
         </div>
       </ThemedContainer>
@@ -228,7 +242,7 @@ import ThemedContainer from '../components/ui/ThemedContainer.astro'
         class="section-header-custom lsa no-repeat"
       />
       <div class="process-content">
-        <Icon name="curved-arrow" />
+        <Icon name="curved-arrow" aria-hidden="true" />
         <div class="process-row">
           <div class="fermentation lsa no-repeat">
             <h3>Natural Fermentation</h3>
@@ -236,7 +250,8 @@ import ThemedContainer from '../components/ui/ThemedContainer.astro'
           </div>
           <figure class="alien lsa no-repeat">
             <Picture
-              src={alientGif}
+              src={alienGif}
+              {...gifImage}
               alt="Alien coming out of a guy's stomach from the movie, 'Alien'"
             />
             <figcaption>
@@ -250,19 +265,13 @@ import ThemedContainer from '../components/ui/ThemedContainer.astro'
             <h3>The Results?</h3>
           </div>
           <div>
-            <div class="pill-container lsa no-repeat">
-              <div class="pill">
-                <span>OUT-OF-BODY EXPERIENCE</span>
-              </div>
-              <div class="pill">
-                <span>MOUTH-WATERING BLISS</span>
-              </div>
-              <div class="pill">
-                <span>SPIRITUAL GROWTH</span>
-              </div>
-            </div>
+            <ul class="pill-container lsa no-repeat">
+              <li class="pill">OUT-OF-BODY EXPERIENCE</li>
+              <li class="pill">MOUTH-WATERING BLISS</li>
+              <li class="pill">SPIRITUAL GROWTH</li>
+            </ul>
             <figure class="truman-show lsa no-repeat">
-              <Picture src={trumanShowGif} alt="Jim Carrey in The Truman Show" />
+              <Picture src={trumanShowGif} alt="Jim Carrey in The Truman Show" {...gifImage} />
               <figcaption>
                 <p>Finding True Happiness</p>
               </figcaption>
@@ -281,14 +290,16 @@ import ThemedContainer from '../components/ui/ThemedContainer.astro'
       <div class="call-to-action-info">
         <p>Join us in creating a better future, one loaf at a time.</p>
         <div class="ctas">
-          <a href="/contact" class="site-cta" aria-label="Reach Out">Reach Out</a>
-          <a href="https://bornyesterdaybakery.square.site/" class="site-cta" aria-label="Order Now"
-            >Order Now</a
-          >
+          <a href="/contact/" class="site-cta">
+            Reach Out
+          </a>
+          <a href="https://bornyesterdaybakery.square.site/" class="site-cta">
+            Order Now
+          </a>
         </div>
       </div>
     </ThemedContainer>
-  </main>
+  </div>
 </Layout>
 
 <style>
@@ -375,7 +386,7 @@ import ThemedContainer from '../components/ui/ThemedContainer.astro'
     }
   }
 
-  .column article {
+  .column :is(article, li) {
     display: grid;
     grid-template-columns: auto 1fr;
     grid-template-rows: auto 1fr;
@@ -453,6 +464,7 @@ import ThemedContainer from '../components/ui/ThemedContainer.astro'
 
   .swiper {
     min-width: 0;
+    margin-block: 0;
     max-width: 85%;
     align-self: center;
 
@@ -486,7 +498,7 @@ import ThemedContainer from '../components/ui/ThemedContainer.astro'
     font-size: var(--size-xs);
     text-align: center;
     transition: var(--transition-long);
-    transition-property: opacity display transform;
+    transition-property: opacity, display, transform;
 
     @starting-style {
       display: block;
@@ -735,14 +747,18 @@ import ThemedContainer from '../components/ui/ThemedContainer.astro'
 
 <script>
   import Swiper from 'swiper'
-  import 'swiper/css/bundle'
-  import { EffectCards, Pagination } from 'swiper/modules'
+  import 'swiper/css'
+  import 'swiper/css/a11y'
+  import 'swiper/css/effect-cards'
+  import 'swiper/css/pagination'
+  import { A11y, EffectCards, Keyboard, Pagination } from 'swiper/modules'
 
   // init Swiper:
   const swiper = new Swiper('.swiper', {
     effect: 'cards',
     grabCursor: true,
-    modules: [EffectCards, Pagination],
+    modules: [A11y, EffectCards, Keyboard, Pagination],
+    keyboard: { enabled: true, onlyInViewport: true },
     pagination: {
       el: '.swiper-pagination',
       clickable: true,

@@ -1,7 +1,6 @@
 @font-face {
   font-family: 'Bobby Jones Soft';
-  src: url('/fonts/bobby-jones-regular.woff2') format('woff2'),
-    url('/fonts/bobby-jones-regular.woff') format('woff');
+  src: url('/fonts/bobby-jones-regular.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -9,8 +8,15 @@
 
 @font-face {
   font-family: 'Bobby Rough Soft Outline';
-  src: url('/fonts/bobby-jones-outline.woff2') format('woff2'),
-    url('/fonts/bobby-jones-outline.woff') format('woff');
+  src: url('/fonts/bobby-jones-outline.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Baloo Bhaijaan 2';
+  src: url('/fonts/baloo-bhaijaan-2-latin.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -60,65 +66,20 @@
 }
 
 /**
-  * Required class: `lsa` (initializes animations and defaults to fade-in)
-  * Note: Add `no-repeat` class to prevent animations from repeating on scroll
+  * Required class: `lsa` (fades in once when scrolled into view)
+  * Content stays visible unless JS has run (`html.js`), so it's never hidden from
+  * screen readers, keyboard users or visitors without JS
   */
 
 /* Accessibility: disable animations for users that prefer reduced motion */
+/* `:where()` keeps these as specific as a single class, so component transitions (e.g. `.site-cta`) still win */
 @media (prefers-reduced-motion: no-preference) {
-  /* Initialize & fade in element on scroll */
-  .lsa {
+  :where(.js) .lsa {
+    transition: opacity var(--transition-long);
+  }
+
+  :where(.js) .lsa:not(.active) {
     opacity: 0;
-    visibility: hidden;
-    transition: var(--transition-long);
-    transition-property: opacity, visibility, transform;
-  }
-
-  /* Handle active state */
-  .lsa.active {
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-  }
-
-  /* Slide up */
-  .lsa.lsa-slide-up {
-    transform: translateY(1rem);
-  }
-
-  /* Slide down */
-  .lsa.lsa-slide-down {
-    transform: translateY(-1rem);
-  }
-
-  /* Slide left */
-  .lsa.lsa-slide-left {
-    transform: translateX(1rem);
-  }
-
-  /* Slide right */
-  .lsa.lsa-slide-right {
-    transform: translateX(-1rem);
-  }
-
-  /* Slide down right */
-  .lsa.lsa-slide-down-right {
-    transform: translate(-1rem, -1rem);
-  }
-
-  /* Slide down left */
-  .lsa.lsa-slide-down-left {
-    transform: translate(1rem, -1rem);
-  }
-
-  /* Slide up right */
-  .lsa.lsa-slide-up-right {
-    transform: translate(-1rem, 1rem);
-  }
-
-  /* Slide up left */
-  .lsa.lsa-slide-up-left {
-    transform: translate(1rem, 1rem);
   }
 }
 
@@ -148,16 +109,17 @@ body {
   color: var(--color-black);
 }
 
-html[data-overlay-displayed='true'] {
+html[data-overlay-displayed='true'],
+html:has(.splash[open]) {
   overflow-y: hidden;
 }
 
-main {
+.page-content {
   padding: 4rem 1rem;
 }
 
 @media (min-width: 768px) {
-  main {
+  .page-content {
     padding: 6rem 2rem;
   }
 }
@@ -265,7 +227,9 @@ svg {
   border: 0;
   border-radius: 10rem;
   cursor: pointer;
-  transition: all var(--transition-normal);
+  /* Not `all`: transitioning inherited visibility keeps CTAs in overlays unfocusable as they open */
+  transition: var(--transition-normal);
+  transition-property: opacity, color, background-color, box-shadow, transform;
 }
 
 .site-cta:hover {
@@ -275,4 +239,22 @@ svg {
 
 .site-cta:active {
   transform: scale(0.99);
+}
+
+/* Accessibility: visible only when focused with the keyboard */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 5;
+  padding: 0.5rem 1rem;
+  background-color: var(--color-white);
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+main:focus {
+  outline: none;
 }
